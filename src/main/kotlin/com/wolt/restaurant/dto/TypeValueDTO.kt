@@ -1,6 +1,6 @@
-package com.wolt.restaurant.dtos
+package com.wolt.restaurant.dto
 
-import com.wolt.restaurant.utils.Type
+import com.wolt.restaurant.util.Type
 import org.jetbrains.annotations.NotNull
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min

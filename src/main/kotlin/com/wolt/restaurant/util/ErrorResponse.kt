@@ -1,4 +1,4 @@
-package com.wolt.restaurant.utils
+package com.wolt.restaurant.util
 
 class ErrorResponse(
     val errorCode: String,

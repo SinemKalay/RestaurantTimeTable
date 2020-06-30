@@ -21,11 +21,16 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("io.github.microutils:kotlin-logging:1.7.8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+	testCompileOnly("ch.qos.logback", "logback-classic", "0.9.26")
+	testCompileOnly("ch.qos.logback", "logback-core", "1.2.3")
+	testCompileOnly("org.slf4j", "slf4j-api", "1.7.30")
+
 }
 
 tasks.withType<Test> {
@@ -37,12 +42,3 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "1.8"
 	}
 }
-
-/*tasks.test {
-	outputs.dir(snippetsDir)
-}
-
-tasks.asciidoctor {
-	inputs.dir(snippetsDir)
-	dependsOn(test)
-}*/

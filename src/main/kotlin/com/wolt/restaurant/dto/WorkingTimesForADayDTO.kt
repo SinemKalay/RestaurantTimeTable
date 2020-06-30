@@ -1,6 +1,6 @@
-package com.wolt.restaurant.dtos
+package com.wolt.restaurant.dto
 
-import com.wolt.restaurant.utils.WeekDays
+import com.wolt.restaurant.util.WeekDays
 
 data class WorkingTimesForADayDTO(
     var day: WeekDays,

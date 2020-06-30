@@ -1,6 +1,6 @@
-package com.wolt.restaurant
+package com.wolt.restaurant.util
 
-object TestsConstants {
+object TestConstants {
     internal const val POST_URI = "/openingHours"
     internal const val JSON_REQUESTS_PATH = "classpath:/static/requests/"
     internal const val JSON_RESPONSES_PATH = "classpath:/static/responses/"

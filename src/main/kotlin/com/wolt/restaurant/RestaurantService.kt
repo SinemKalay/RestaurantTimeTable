@@ -1,13 +1,14 @@
 package com.wolt.restaurant
 
-import com.wolt.restaurant.dtos.DailyDTO
-import com.wolt.restaurant.dtos.TypeValueDTO
-import com.wolt.restaurant.dtos.WorkingTimesForADayDTO
-import com.wolt.restaurant.exceptions.InaccurateTimingException
-import com.wolt.restaurant.exceptions.UnmatchedOpenCloseTimeException
-import com.wolt.restaurant.utils.Constants
-import com.wolt.restaurant.utils.Type
-import com.wolt.restaurant.utils.WeekDays
+import com.wolt.restaurant.dto.DailyDTO
+import com.wolt.restaurant.dto.TypeValueDTO
+import com.wolt.restaurant.dto.WorkingTimesForADayDTO
+import com.wolt.restaurant.exception.InaccurateTimingException
+import com.wolt.restaurant.exception.UnmatchedOpenCloseTimeException
+import com.wolt.restaurant.util.Constants
+import com.wolt.restaurant.util.Type
+import com.wolt.restaurant.util.WeekDays
+import com.wolt.restaurant.util.getLogger
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
 import java.util.TimeZone
@@ -22,6 +23,7 @@ class RestaurantService {
     fun analyzeMap(hoursMap: HashMap<WeekDays, List<TypeValueDTO>>): String {
         readableWorkingTimesListDTO = mutableListOf()
         analyzeWorkingHours(hoursMap)
+        getLogger().info("Restaurant's working hours has been converted to readable format")
         return createReadableResponse(readableWorkingTimesListDTO)
     }
 
@@ -58,6 +60,7 @@ class RestaurantService {
                         addDailyShift(localDailyDTO)
                         localDailyDTO.workingTimesList = mutableListOf()
                         localDailyDTO.day = day
+                        getLogger().warn("Opening-Closing time are not on same day")
                     }
                 }
             }
@@ -71,7 +74,8 @@ class RestaurantService {
     @Throws(UnmatchedOpenCloseTimeException::class)
     private fun openingTimeOperations(dailyDTO: DailyDTO, timeInt: Int): DailyDTO {
         if (dailyDTO.isWaitingForClosingTime)
-            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_OPENING)
+            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_OPENING,
+                "Opening time information was not expected")
         var time = convertTimeFormat(timeInt)
         dailyDTO.isWaitingForClosingTime = true
         dailyDTO.workingTimesList.add("$time - ")
@@ -80,15 +84,19 @@ class RestaurantService {
         return dailyDTO
     }
 
-    @Throws(UnmatchedOpenCloseTimeException::class)
+    @Throws(UnmatchedOpenCloseTimeException::class, InaccurateTimingException::class)
     private fun closingTimeOperations(index: Int, dailyDTO: DailyDTO, closingTimeInt: Int): DailyDTO {
         if (!dailyDTO.isWaitingForClosingTime)
-            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_CLOSING)
+            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_CLOSING,
+                "Closing time information was not expected")
         if (index == 0 && !dailyDTO.isPreviousDayExist)
-            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_NON_SEQUENTIAL)
+            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_NON_SEQUENTIAL,
+                "Opening-Closing times must be on same or sequential day")
+
         val openingTimeInt = dailyDTO.openingTimeInt
         if (index !=0 && openingTimeInt > closingTimeInt)
-            throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING)
+            throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING,
+                "Opening time can not be later than closing time")
 
         val closingTime = convertTimeFormat(closingTimeInt)
         val lastIndex = dailyDTO.workingTimesList.lastIndex
@@ -103,11 +111,13 @@ class RestaurantService {
         val workingTimesList = listOf(Constants.ALL_DAY_CLOSED)
         val workingTimesForADay = WorkingTimesForADayDTO(day, workingTimesList)
         readableWorkingTimesListDTO.add(workingTimesForADay)
+        getLogger().info("Restaurant has been marked all day closed on $day")
     }
 
     private fun addDailyShift(dailyDTO: DailyDTO) {
         val workingTimesForADay = WorkingTimesForADayDTO(dailyDTO.day, dailyDTO.workingTimesList)
         readableWorkingTimesListDTO.add(workingTimesForADay)
+        getLogger().info("Daily working hours has been added for ${dailyDTO.day}")
     }
 
     private fun convertTimeFormat(sec: Int): String {

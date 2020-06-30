@@ -1,7 +1,7 @@
-package com.wolt.restaurant.exceptions
+package com.wolt.restaurant.exception
 
-import com.wolt.restaurant.utils.ErrorResponse
-import com.wolt.restaurant.utils.ResponseConstants
+import com.wolt.restaurant.util.ErrorResponse
+import com.wolt.restaurant.util.ResponseConstants
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler

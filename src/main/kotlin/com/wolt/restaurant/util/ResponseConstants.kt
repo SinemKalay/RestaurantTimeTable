@@ -1,4 +1,4 @@
-package com.wolt.restaurant.utils
+package com.wolt.restaurant.util
 
 enum class ResponseConstants(val value: String) {
     SUCCESS("success"),

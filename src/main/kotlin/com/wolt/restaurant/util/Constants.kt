@@ -1,4 +1,4 @@
-package com.wolt.restaurant.utils
+package com.wolt.restaurant.util
 
 object Constants {
     internal const val POST_URI = "/openingHours"
