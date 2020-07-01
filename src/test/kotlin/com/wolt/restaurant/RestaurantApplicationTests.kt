@@ -3,7 +3,6 @@ package com.wolt.restaurant
 import com.wolt.restaurant.exception.InaccurateTimingException
 import com.wolt.restaurant.exception.UnmatchedOpenCloseTimeException
 import com.wolt.restaurant.util.ErrorResponse
-import com.wolt.restaurant.util.ResponseConstants
 import com.wolt.restaurant.util.TestConstants
 import com.wolt.restaurant.util.TestUtil
 import org.junit.jupiter.api.BeforeEach
@@ -31,7 +30,6 @@ class RestaurantApplicationTests {
 	@Autowired
 	lateinit var webApplicationContext: WebApplicationContext
 	lateinit var mockMvc: MockMvc
-	//lateinit var testUtil: TestUtil
 
 	@BeforeEach
 	fun beforeEach() {
@@ -90,6 +88,46 @@ class RestaurantApplicationTests {
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
 			"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_CLOSING, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about waiting for closing time")
+	fun failWithWaitingForClosing() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_WAIT_CLOSING,
+			"Closing time was waited for opening time at the end")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_WAIT_CLOSING, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about value")
+	fun failWithNegativeValueField() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_INACCURATE_TIMING,
+			"Value field should be exist and in between 0 and 86400.")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_NEGATIVE_VALUE, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about non-existing  field")
+	fun failWithNonExistValueField() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_VALUE_NOT_FOUND,
+			"Value field is required")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_EXIST_VALUE, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about non-existing type field")
+	fun failWithNonExistTypeField() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_TYPE_NOT_FOUND,
+			"Type field is required")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_EXIST_TYPE, errorResponse)
 	}
 
 	internal fun sendPostRequest(jsonReqFileName: String, jsonResFileName: String): MvcResult? {

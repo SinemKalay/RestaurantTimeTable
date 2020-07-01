@@ -1,9 +1,13 @@
 package com.wolt.restaurant
 
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import com.google.gson.reflect.TypeToken
 import com.wolt.restaurant.dto.DailyDTO
 import com.wolt.restaurant.dto.TypeValueDTO
 import com.wolt.restaurant.dto.WorkingTimesForADayDTO
 import com.wolt.restaurant.exception.InaccurateTimingException
+import com.wolt.restaurant.exception.RespBodyNotFoundException
 import com.wolt.restaurant.exception.UnmatchedOpenCloseTimeException
 import com.wolt.restaurant.util.Constants
 import com.wolt.restaurant.util.TypeEnum
@@ -12,22 +16,20 @@ import com.wolt.restaurant.util.WeekDays
 import com.wolt.restaurant.util.getLogger
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
-import java.util.TimeZone
-import java.util.Date
-import kotlin.collections.HashMap
+import java.util.*
 
 @Service
 class RestaurantService {
 
     private var readableWorkingTimesListDTO: MutableList<WorkingTimesForADayDTO> = mutableListOf()
 
-    fun analyzeMap(hoursMap: HashMap<WeekDays, List<TypeValueDTO>>): String {
-        if(!TypeValueValidator().isValidatedOk(hoursMap))
-            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_OPENING,
-                "Opening time information was not expected")
-        readableWorkingTimesListDTO = mutableListOf()
-        analyzeWorkingHours(hoursMap)
-        getLogger().info("Restaurant's working hours has been converted to readable format")
+    fun analyzeTimeTable(jsonStr: String): String {
+        val hoursMap = parseJsonToDTO(jsonStr)
+        if(TypeValueValidator().isValidatedOk(hoursMap)) {
+            getLogger().info("Restaurant working time data is sent to analyze...")
+            analyzeWorkingHours(hoursMap)
+        }
+
         return createReadableResponse(readableWorkingTimesListDTO)
     }
 
@@ -35,6 +37,7 @@ class RestaurantService {
         val daysInInput = WeekDays.values().filter { d -> hoursMap.containsKey(d) }
         var dailyDTO = DailyDTO(WeekDays.monday, false,
             mutableListOf(), false, 0)
+        readableWorkingTimesListDTO = mutableListOf()
 
         for (day in daysInInput) {
             val hoursList = hoursMap.getValue(day)
@@ -49,6 +52,13 @@ class RestaurantService {
                 dailyDTO = lookCloserToHours(Pair(day, hoursList), dailyDTO)
             }
         }
+        isStillWaitingClosingTime(dailyDTO)
+    }
+
+    private fun isStillWaitingClosingTime(dailyDTO: DailyDTO) {
+        if(dailyDTO.isWaitingForClosingTime)
+            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_WAIT_CLOSING,
+                "Closing time was waited for opening time at the end")
     }
 
     private fun lookCloserToHours(dayHoursPair: Pair<WeekDays, List<TypeValueDTO>>,
@@ -126,6 +136,20 @@ class RestaurantService {
         getLogger().info("Daily working hours has been added for ${dailyDTO.day}")
     }
 
+
+    @Throws(JsonSyntaxException::class, RespBodyNotFoundException::class)
+    private fun parseJsonToDTO(jsonStr: String): HashMap<WeekDays, List<TypeValueDTO>> {
+        val gson = Gson()
+        val convertedObj: HashMap<WeekDays, List<TypeValueDTO>> =
+            gson.fromJson(jsonStr, object : TypeToken<HashMap<WeekDays, List<TypeValueDTO>>>() {}.type)
+        if(convertedObj.size==0)
+            throw RespBodyNotFoundException(Constants.EXP_MSG_RESP_BODY_NOT_FOUND,
+                Constants.REASON_RESP_BODY_NOT_FOUND)
+        getLogger().info("Json string converted to HashMap successfully")
+
+        return convertedObj
+    }
+
     private fun convertTimeFormat(sec: Int): String {
         val df = SimpleDateFormat(Constants.HOUR_FORMAT_12)
         df.timeZone = TimeZone.getTimeZone(Constants.DEFAULT_TIMEZONE)
@@ -133,16 +157,17 @@ class RestaurantService {
     }
 
     private fun createReadableResponse(workingTimesForDays: List<WorkingTimesForADayDTO>): String {
-        var responseString = "Restaurant is open:\n"
+        val respStrBuilder = StringBuilder("Restaurant is open:\n");
         for (dailyHours in workingTimesForDays) {
-            responseString += "${dailyHours.day.name.capitalize()}: "
+            respStrBuilder.append("${dailyHours.day.name.capitalize()}: ")
             for ((index, period) in dailyHours.workingIntervalList.withIndex()) {
-                responseString += period
+                respStrBuilder.append(period)
                 if (index < dailyHours.workingIntervalList.size - 1)
-                    responseString += ", "
+                    respStrBuilder.append(", ")
             }
-            responseString += "\n"
+            respStrBuilder.append("\n")
         }
-        return responseString
+        getLogger().info("Restaurant's working hours has been converted to readable format")
+        return respStrBuilder.toString()
     }
 }

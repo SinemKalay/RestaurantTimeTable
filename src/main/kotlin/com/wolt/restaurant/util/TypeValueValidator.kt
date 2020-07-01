@@ -4,6 +4,7 @@ import com.wolt.restaurant.dto.TypeValueDTO
 import com.wolt.restaurant.exception.InaccurateTimingException
 import com.wolt.restaurant.exception.NoSuchDayException
 import com.wolt.restaurant.exception.NoSuchTypeException
+import kotlin.collections.HashMap
 
 class TypeValueValidator {
 
@@ -17,8 +18,9 @@ class TypeValueValidator {
         val daysSet: Set<WeekDays> = daysMutableSet.toSet()
         daysSet.forEach { d->
             if(!WeekDays.values().contains(d)){
-                throw NoSuchDayException(Constants.EXP_MSG_NO_SUCH_DAY+d,
-                    "${Constants.REASON_NO_SUCH_DAY} ${WeekDays.values()}")
+                var usableDays = WeekDays.values().contentToString()
+                throw NoSuchDayException(Constants.EXP_MSG_NO_SUCH_DAY,
+                    "${Constants.REASON_NO_SUCH_DAY} $usableDays")
             }
         }
         return true
@@ -39,14 +41,15 @@ class TypeValueValidator {
 
     private fun checkTypeField(type: TypeEnum) {
         if(!TypeEnum.values().contains(type)){
-            throw NoSuchTypeException(Constants.EXP_MSG_NO_TYPE_DAY+type,
-                "${Constants.REASON_NO_TYPE_DAY} ${TypeEnum.values()}")
+            var usableTypes = TypeEnum.values().contentToString()
+            throw NoSuchTypeException(Constants.EXP_MSG_NO_TYPE_DAY,
+                "${Constants.REASON_NO_TYPE_DAY} $usableTypes")
         }
     }
 
     private fun checkValueField(value: Int) {
         if(value < 0 || value > 86399)
             throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING,
-                "${Constants.REASON_INACCURATE_TIMING_VALUE} $value")
+                Constants.REASON_INACCURATE_TIMING_VALUE)
     }
 }
