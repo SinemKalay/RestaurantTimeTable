@@ -2,9 +2,9 @@ package com.wolt.restaurant.dto
 
 import com.wolt.restaurant.util.WeekDays
 
-class DailyDTO(
-    internal var day: WeekDays,
-    internal var isWaitingForClosingTime: Boolean,
-    internal var workingTimesList: MutableList<String>,
-    internal var isPreviousDayExist: Boolean,
-    internal var openingTimeInt: Int)
+data class DailyDTO(
+     var day: WeekDays,
+     var isWaitingForClosingTime: Boolean,
+     var workingTimesList: MutableList<String>,
+     var isPreviousDayExist: Boolean,
+     var openingTimeInt: Int)

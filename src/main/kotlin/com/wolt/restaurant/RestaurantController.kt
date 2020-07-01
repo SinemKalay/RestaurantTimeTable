@@ -1,5 +1,11 @@
 package com.wolt.restaurant
 
+import com.fasterxml.jackson.annotation.JsonValue
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import com.wolt.restaurant.dto.TypeValueDTO
 import com.wolt.restaurant.util.Constants
 import com.wolt.restaurant.util.WeekDays
@@ -13,11 +19,10 @@ import javax.validation.Valid
 
 @RestController
 class RestaurantController @Autowired constructor(
-    private val service: RestaurantService
-) {
+    private val service: RestaurantService) {
+
     @PostMapping(path = [Constants.POST_URI], consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun getReadableOpeningHours(@RequestBody() @Valid openingHoursInfo:
-                HashMap<WeekDays, List<TypeValueDTO>>): ResponseEntity<String> {
+    fun getReadableOpeningHours(@RequestBody() @Valid openingHoursInfo: String): ResponseEntity<String> {
         return ResponseEntity.ok(service.analyzeMap(openingHoursInfo))
     }
 }

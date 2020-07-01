@@ -1,19 +1,27 @@
 package com.wolt.restaurant.dto
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.google.gson.annotations.SerializedName
+import com.wolt.restaurant.exception.TimeValueNotFoundException
+import com.wolt.restaurant.exception.TypeNotFoundException
+import com.wolt.restaurant.util.Constants
 import com.wolt.restaurant.util.TypeEnum
-import javax.validation.constraints.Max
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotEmpty
 
 data class TypeValueDTO(
-    @field:NotEmpty
-    @JsonProperty("type")
-    var type: TypeEnum,
+    @SerializedName("type") private val _type: TypeEnum?,
+    @SerializedName("value") private val _value: Int?
+) {
+    val type
+        get() = _type ?: throw TypeNotFoundException(
+            Constants.EXP_MSG_TYPE_NOT_FOUND, Constants.REASON_TYPE_NOT_FOUND)
 
-    @JsonProperty("value")
-    @field:[NotEmpty Min(0) Max(86399)]
-    var value: Int
-)
+    val value
+        get() = _value ?: throw TimeValueNotFoundException(
+            Constants.EXP_MSG_VALUE_NOT_FOUND, Constants.REASON_VALUE_NOT_FOUND)
+
+    init {
+        this.type
+        this.value
+    }
+}
 
 
