@@ -6,7 +6,8 @@ import com.wolt.restaurant.dto.WorkingTimesForADayDTO
 import com.wolt.restaurant.exception.InaccurateTimingException
 import com.wolt.restaurant.exception.UnmatchedOpenCloseTimeException
 import com.wolt.restaurant.util.Constants
-import com.wolt.restaurant.util.Type
+import com.wolt.restaurant.util.TypeEnum
+import com.wolt.restaurant.util.TypeValueValidator
 import com.wolt.restaurant.util.WeekDays
 import com.wolt.restaurant.util.getLogger
 import org.springframework.stereotype.Service
@@ -21,6 +22,9 @@ class RestaurantService {
     private var readableWorkingTimesListDTO: MutableList<WorkingTimesForADayDTO> = mutableListOf()
 
     fun analyzeMap(hoursMap: HashMap<WeekDays, List<TypeValueDTO>>): String {
+        if(!TypeValueValidator().isValidatedOk(hoursMap))
+            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_OPENING,
+                "Opening time information was not expected")
         readableWorkingTimesListDTO = mutableListOf()
         analyzeWorkingHours(hoursMap)
         getLogger().info("Restaurant's working hours has been converted to readable format")
@@ -29,7 +33,8 @@ class RestaurantService {
 
     private fun analyzeWorkingHours(hoursMap: HashMap<WeekDays, List<TypeValueDTO>>) {
         val daysInInput = WeekDays.values().filter { d -> hoursMap.containsKey(d) }
-        var dailyDTO = DailyDTO(WeekDays.monday, false, mutableListOf(), false, 0)
+        var dailyDTO = DailyDTO(WeekDays.monday, false,
+            mutableListOf(), false, 0)
 
         for (day in daysInInput) {
             val hoursList = hoursMap.getValue(day)
@@ -39,7 +44,8 @@ class RestaurantService {
                 val isPreviousDayExist = hoursMap.containsKey(WeekDays.values()[day.ordinal - 1])
                 dailyDTO.isPreviousDayExist = isPreviousDayExist
                 if (!dailyDTO.isWaitingForClosingTime)
-                    dailyDTO = DailyDTO(day, false, mutableListOf(), isPreviousDayExist,0)
+                    dailyDTO = DailyDTO(day, false,
+                        mutableListOf(), isPreviousDayExist,0)
                 dailyDTO = lookCloserToHours(Pair(day, hoursList), dailyDTO)
             }
         }
@@ -53,8 +59,8 @@ class RestaurantService {
 
         for ((index, typeValueDTO) in hoursList.withIndex()) {
             when (typeValueDTO.type) {
-                Type.open -> localDailyDTO = openingTimeOperations(localDailyDTO,typeValueDTO.value)
-                Type.close -> {
+                TypeEnum.open -> localDailyDTO = openingTimeOperations(localDailyDTO,typeValueDTO.value)
+                TypeEnum.close -> {
                     localDailyDTO = closingTimeOperations(index, localDailyDTO, typeValueDTO.value)
                     if (index == 0) {
                         addDailyShift(localDailyDTO)
@@ -98,9 +104,9 @@ class RestaurantService {
             throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING,
                 "Opening time can not be later than closing time")
 
-        val closingTime = convertTimeFormat(closingTimeInt)
         val lastIndex = dailyDTO.workingTimesList.lastIndex
         val openingTime = dailyDTO.workingTimesList.last()
+        val closingTime = convertTimeFormat(closingTimeInt)
         dailyDTO.workingTimesList[lastIndex] = openingTime + closingTime
         dailyDTO.isWaitingForClosingTime = false
 

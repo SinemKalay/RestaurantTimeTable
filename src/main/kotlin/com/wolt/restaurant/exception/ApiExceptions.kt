@@ -12,7 +12,7 @@ class NoSuchDayException(message: String):  RuntimeException(message){
 
 class NoSuchTypeException(message: String):  RuntimeException(message){
     @JvmOverloads
-    constructor(message: String, reason: String): this(message){
+    constructor(message: String, reason: String):  this("$message $reason"){
         getLogger().error("Request processing failed: " +
             "NoSuchTypeException: $message with reason 'There is no such day named as $reason'")
     }
@@ -20,14 +20,14 @@ class NoSuchTypeException(message: String):  RuntimeException(message){
 
 class UnmatchedOpenCloseTimeException(message: String):  RuntimeException(message){
     @JvmOverloads
-    constructor(message: String, reason: String): this(message){
+    constructor(message: String, reason: String):  this("$message $reason"){
         getLogger().error("Request processing failed: " +
             "UnmatchedOpenCloseTimeException: $message with reason '$reason'")
     }
 }
 
-class InaccurateTimingException(message: String) :  RuntimeException(message){
-    @JvmOverloads constructor(message: String, reason: String): this(message){
+class InaccurateTimingException(message: String):  RuntimeException(message){
+    constructor(message: String, reason: String): this("$message $reason"){
         getLogger().error("Request processing failed: " +
             "InaccurateTimingException : $message with reason '$reason'")
     }

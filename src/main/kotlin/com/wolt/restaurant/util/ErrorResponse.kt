@@ -1,5 +1,11 @@
 package com.wolt.restaurant.util
 
+import org.springframework.http.HttpStatus
+import java.time.LocalDateTime
+
 class ErrorResponse(
-    val errorCode: String,
-    val errorMessage: String)
+    val timestamp: LocalDateTime,
+    val status: HttpStatus,
+    val error: String,
+    val message: String
+    )
