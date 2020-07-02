@@ -42,8 +42,8 @@ class TypeValueValidator {
     private fun checkTypeField(type: TypeEnum) {
         if(!TypeEnum.values().contains(type)){
             var usableTypes = TypeEnum.values().contentToString()
-            throw NoSuchTypeException(Constants.EXP_MSG_NO_TYPE_DAY,
-                "${Constants.REASON_NO_TYPE_DAY} $usableTypes")
+            throw NoSuchTypeException(Constants.EXP_MSG_NO_SUCH_TYPE,
+                "${Constants.REASON_NO_SUCH_TYPE} $usableTypes")
         }
     }
 
