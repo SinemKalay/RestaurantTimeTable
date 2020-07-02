@@ -16,13 +16,6 @@ class RespBodyNotFoundException(message: String):  RuntimeException(message){
     }
 }
 
-class DayNotFoundException(message: String):  RuntimeException(message){
-    constructor(message: String, reason: String): this("$message $reason"){
-        getLogger().error("Request processing failed: " +
-            "DayNotFoundException: $message with reason '$reason'")
-    }
-}
-
 class NoSuchTypeException(message: String):  RuntimeException(message){
     constructor(message: String, reason: String):  this("$message $reason"){
         getLogger().error("Request processing failed: " +
@@ -55,12 +48,5 @@ class InaccurateTimingException(message: String):  RuntimeException(message){
     constructor(message: String, reason: String): this("$message $reason"){
         getLogger().error("Request processing failed: " +
             "InaccurateTimingException : $message with reason '$reason'")
-    }
-}
-
-class DuplicateKeyException(message: String):  RuntimeException(message){
-    constructor(message: String, reason: String): this("$message $reason"){
-        getLogger().error("Request processing failed: " +
-            "DuplicateKeyException : $message with reason '$reason'")
     }
 }

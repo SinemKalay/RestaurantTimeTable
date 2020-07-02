@@ -45,14 +45,14 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return readable data for whole week")
-	fun successfulWithPartOfWeekInfo() {
+	fun `successful With Whole Week Info Received`() {
 		sendPostRequest(TestConstants.JSON_FILE_PATH_PARTLY_WEEK,
 			TestConstants.RESP_FILE_PATH_PARTLY_WEEK)
 	}
 
 	@Test
 	@DisplayName("Should return error about relational days not sequential")
-	fun failWithNonSequentialDayInfoWhenOvernightWorkingTime() {
+	fun  `fail With Non-Sequential Day Info When Overnight Working Time` () {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_NON_SEQUENTIAL,
 			"Opening-Closing times must be on same or sequential day")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -62,7 +62,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about opening - closing times are not compatible")
-	fun failWithInaccurateTiming() {
+	fun  `fail With InaccurateTiming`() {
 		val exception= InaccurateTimingException(TestConstants.EXP_MSG_INACCURATE_TIMING,
 			"Opening time can not be later than closing time")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -72,7 +72,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about unexpected opening time")
-	fun failWithUnexpectedOpeningTimeReceived() {
+	fun  `fail With Unexpected Opening Time Received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_OPENING,
 			"Opening time information was not expected")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -82,7 +82,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about unexpected closing time")
-	fun failWithUnexpectedClosingTimeReceived() {
+	fun `fail With Unexpected Closing Time Received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_CLOSING,
 			"Closing time information was not expected")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -92,7 +92,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about waiting for closing time")
-	fun failWithWaitingForClosing() {
+	fun `fail With Waiting For Closing`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_WAIT_CLOSING,
 			"Closing time was waited for opening time at the end")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -102,7 +102,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about value")
-	fun failWithNegativeValueField() {
+	fun `fail With Negative Value Field`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_INACCURATE_TIMING,
 			"Value field should be exist and in between 0 and 86400.")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -112,7 +112,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about non-existing  field")
-	fun failWithNonExistValueField() {
+	fun `fail With Non-Exist Value Field`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_VALUE_NOT_FOUND,
 			"Value field is required")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
@@ -122,7 +122,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about non-existing type field")
-	fun failWithNonExistTypeField() {
+	fun `fail With Non-Exist Type Field`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_TYPE_NOT_FOUND,
 			"Type field is required")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,

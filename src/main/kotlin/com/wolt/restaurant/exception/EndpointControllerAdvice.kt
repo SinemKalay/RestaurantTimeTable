@@ -40,13 +40,6 @@ class EndpointControllerAdvice: ResponseEntityExceptionHandler() {
         return ResponseEntityBuilder().build(errorResponse)
     }
 
-    @ExceptionHandler(DayNotFoundException::class)
-    fun handleDayNotFoundException(ex: DayNotFoundException): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
-            "Malformed JSON request", ex.message.toString())
-        return ResponseEntityBuilder().build(errorResponse)
-    }
-
     @ExceptionHandler(TypeNotFoundException::class)
     fun handleTypeNotFoundException(ex: TypeNotFoundException): ResponseEntity<Any> {
         val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
@@ -60,7 +53,6 @@ class EndpointControllerAdvice: ResponseEntityExceptionHandler() {
             "Malformed JSON request", ex.message.toString())
         return ResponseEntityBuilder().build(errorResponse)
     }
-
 
     @ExceptionHandler(NoSuchTypeException::class)
     fun handleNoSuchTypeException(ex: NoSuchTypeException): ResponseEntity<Any> {
