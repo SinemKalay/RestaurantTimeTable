@@ -4,30 +4,35 @@ import com.wolt.restaurant.dto.TypeValueDTO
 import com.wolt.restaurant.exception.InaccurateTimingException
 import com.wolt.restaurant.exception.NoSuchDayException
 import com.wolt.restaurant.exception.NoSuchTypeException
+import com.wolt.restaurant.util.Constants.EXP_MSG_NO_SUCH_DAY
+import com.wolt.restaurant.util.Constants.EXP_MSG_NO_SUCH_TYPE
+import com.wolt.restaurant.util.Constants.MAX_TIME_VALUE
+import com.wolt.restaurant.util.Constants.MIN_TIME_VALUE
+import com.wolt.restaurant.util.Constants.REASON_NO_SUCH_DAY
+import com.wolt.restaurant.util.Constants.REASON_NO_SUCH_TYPE
 import kotlin.collections.HashMap
 
 class TypeValueValidator {
 
-    fun isValidatedOk(typeValueMap: HashMap<WeekDays, List<TypeValueDTO>>): Boolean {
-        return checkWeekdayNames(typeValueMap.keys) &&
-            checkTypeValueDTOList(typeValueMap.values)
+    fun validateScheduleInput(typeValueMap: HashMap<WeekDays, List<TypeValueDTO>>) {
+        checkWeekdayNames(typeValueMap.keys)
+        checkTypeValueDTOList(typeValueMap.values)
     }
 
     @Throws(NoSuchDayException::class)
-    private fun checkWeekdayNames(daysMutableSet: MutableSet<WeekDays>): Boolean {
+    private fun checkWeekdayNames(daysMutableSet: MutableSet<WeekDays>) {
         val daysSet: Set<WeekDays> = daysMutableSet.toSet()
         daysSet.forEach { d->
             if(!WeekDays.values().contains(d)){
-                var usableDays = WeekDays.values().contentToString()
-                throw NoSuchDayException(Constants.EXP_MSG_NO_SUCH_DAY,
-                    "${Constants.REASON_NO_SUCH_DAY} $usableDays")
+                val usableDays = WeekDays.values().contentToString()
+                throw NoSuchDayException(EXP_MSG_NO_SUCH_DAY,
+                    "$REASON_NO_SUCH_DAY $usableDays")
             }
         }
-        return true
     }
 
     @Throws(NoSuchDayException::class, InaccurateTimingException::class)
-    private fun checkTypeValueDTOList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>): Boolean {
+    private fun checkTypeValueDTOList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>) {
         val outerList: List<List<TypeValueDTO>> = mutListOfObjList.toList()
 
         outerList.forEach{innerList->
@@ -36,19 +41,18 @@ class TypeValueValidator {
                 checkValueField(typeValueObj.value)
             }
         }
-        return true
     }
 
-    private fun checkTypeField(type: TypeEnum) {
-        if(!TypeEnum.values().contains(type)){
-            var usableTypes = TypeEnum.values().contentToString()
-            throw NoSuchTypeException(Constants.EXP_MSG_NO_SUCH_TYPE,
-                "${Constants.REASON_NO_SUCH_TYPE} $usableTypes")
+    private fun checkTypeField(type: String) {
+        if(type != TypeEnum.open.name && type != TypeEnum.close.name){
+            val usableTypes = TypeEnum.values().contentToString()
+            throw NoSuchTypeException(EXP_MSG_NO_SUCH_TYPE,
+                "$REASON_NO_SUCH_TYPE $usableTypes")
         }
     }
 
     private fun checkValueField(value: Int) {
-        if(value < 0 || value > 86399)
+        if(value < MIN_TIME_VALUE || value > MAX_TIME_VALUE)
             throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING,
                 Constants.REASON_INACCURATE_TIMING_VALUE)
     }

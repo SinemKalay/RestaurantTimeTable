@@ -4,13 +4,9 @@ import com.google.gson.annotations.SerializedName
 import com.wolt.restaurant.exception.TimeValueNotFoundException
 import com.wolt.restaurant.exception.TypeNotFoundException
 import com.wolt.restaurant.util.Constants
-import com.wolt.restaurant.util.TypeEnum
-import javax.validation.constraints.NotEmpty
 
 data class TypeValueDTO(
-    @field:NotEmpty
-    @SerializedName("type") private val _type: TypeEnum?,
-    @field:NotEmpty
+    @SerializedName("type") private val _type: String?,
     @SerializedName("value") private val _value: Int?
 ) {
     val type

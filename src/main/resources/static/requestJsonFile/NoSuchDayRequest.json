@@ -1,5 +1,5 @@
 {
-  "friday" : [
+  "randomDay" : [
     {
       "type" : "open",
       "value" : 64800
@@ -21,6 +21,10 @@
     {
       "type" : "open",
       "value" : 57600
+    },
+    {
+      "type" : "close",
+      "value" : 82800
     }
   ]
 }

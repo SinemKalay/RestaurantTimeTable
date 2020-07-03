@@ -1,7 +1,7 @@
 {
   "friday" : [
     {
-      "type" : "open",
+      "type" : "wrongTypeName",
       "value" : 64800
     }
   ],
@@ -21,6 +21,10 @@
     {
       "type" : "open",
       "value" : 57600
+    },
+    {
+      "type" : "close",
+      "value" : 82800
     }
   ]
 }

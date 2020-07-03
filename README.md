@@ -20,7 +20,9 @@ Restaurant application can be run via terminal or IDE:
 * Or, the application can be imported to the IDE to run (prefereably Intellij Idea).After importing, first build and then run the application via the button on top right corner.
 
 ### How to call the API
+There is different ways to call an api. As an example below options could be choosen
 
+* Via Postman
 Postman can be used to call rest api after run the application.
 1. Open Postman application
 2. Select "POST" as  request method
@@ -30,9 +32,40 @@ Postman can be used to call rest api after run the application.
 NOTE: Wolt.postman_collection.json in the project root can be also imported
 easily.
 
-### How to run the API's unit tests
----TODO---
+* Via Curl command
+After run the application, api can be used via sending curl command from terminal
+Below curl command example can be found.
 
+curl --location --request POST "http://localhost:8080/convertTimesToReadableFormat" \
+  --header "Content-Type: application/json" \
+  --data "{
+  \"friday\" : [
+    {
+      \"type\" : \"open\",
+      \"value\" : 64800
+    }
+  ],
+  \"saturday\": [
+    {
+      \"type\" : \"close\",
+      \"value\" : 3600
+    },
+    {
+      \"type\" : \"open\",
+      \"value\" : 32400
+    },
+    {
+      \"type\" : \"close\",
+      \"value\" : 39600
+    }
+  ]
+}"
+
+### How to run the API's tests
+To test the application, you can take a look on tests from IDE. Find RestaurantApplicationTests under 
+project_root/src/test/kotlin/com/wolt/restaurant and right click on it. Then choose
+"Run RestaurantApplicationTests" option. All tests will be run. You can see the results
+in run panel.
 
 ## Explore Rest API
 As it has been mentioned above, our Rest API has only one endpoint.
@@ -48,6 +81,18 @@ The body of request should incluse JSON payload.
 Example json request body samples can be found under resources/static/requestJsonFile/
 You can test them using postman manually or you can check out unit tests which uses
 those request body files. 
+
+### Constraints
+There are some constraints of the application which is designed upon
+desired data format. To work through successfully, these constraints
+should be followed.
+
+* Weekday names should be picked within followings: 
+  monday, tuesday, wednesday, thursday, friday, saturday, sunday
+  
+* Type names should be picked within followings: open, close
+
+* Time values should be in between 0 and 86400
 
 ### HTTP Response
 In successful scenario API will return easily readable restaurant time

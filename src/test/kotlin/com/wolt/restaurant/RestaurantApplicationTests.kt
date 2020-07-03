@@ -38,21 +38,28 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return readable data for days in request")
-	fun successfulWithWholeWeekInfo() {
-		sendPostRequest(TestConstants.JSON_FILE_PATH_WHOLE_WEEK,
-			TestConstants.RESP_FILE_PATH_WHOLE_WEEK)
-	}
-
-	@Test
-	@DisplayName("Should return readable data for whole week")
-	fun `successful With Whole Week Info Received`() {
+	fun `successful when partial part of week received` () {
 		sendPostRequest(TestConstants.JSON_FILE_PATH_PARTLY_WEEK,
 			TestConstants.RESP_FILE_PATH_PARTLY_WEEK)
 	}
 
 	@Test
-	@DisplayName("Should return error about relational days not sequential")
-	fun  `fail With Non-Sequential Day Info When Overnight Working Time` () {
+	@DisplayName("Should return readable data for whole week")
+	fun `successful when whole week info received`() {
+		sendPostRequest(TestConstants.JSON_FILE_PATH_WHOLE_WEEK,
+			TestConstants.RESP_FILE_PATH_WHOLE_WEEK)
+	}
+
+	@Test
+	@DisplayName("Should return readable data for week with sunday overtime")
+	fun `successful when week with Sunday overtime info`() {
+		sendPostRequest(TestConstants.JSON_FILE_PATH_SUNDAY_OVERTIME,
+			TestConstants.RESP_FILE_PATH_SUNDAY_OVERTIME)
+	}
+
+	@Test
+	@DisplayName("Should return error about relational days not on sequential order")
+	fun  `fail when non-sequential day info with overnight time` () {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_NON_SEQUENTIAL,
 			"Opening-Closing times must be on same or sequential day")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -62,7 +69,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about opening - closing times are not compatible")
-	fun  `fail With InaccurateTiming`() {
+	fun  `fail when opening time later then closing time`() {
 		val exception= InaccurateTimingException(TestConstants.EXP_MSG_INACCURATE_TIMING,
 			"Opening time can not be later than closing time")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -71,38 +78,8 @@ class RestaurantApplicationTests {
 	}
 
 	@Test
-	@DisplayName("Should return error about unexpected opening time")
-	fun  `fail With Unexpected Opening Time Received`() {
-		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_OPENING,
-			"Opening time information was not expected")
-		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
-		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_OPENING, errorResponse)
-	}
-
-	@Test
-	@DisplayName("Should return error about unexpected closing time")
-	fun `fail With Unexpected Closing Time Received`() {
-		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_CLOSING,
-			"Closing time information was not expected")
-		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
-		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_CLOSING, errorResponse)
-	}
-
-	@Test
-	@DisplayName("Should return error about waiting for closing time")
-	fun `fail With Waiting For Closing`() {
-		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_WAIT_CLOSING,
-			"Closing time was waited for opening time at the end")
-		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
-		sendPostRequest(TestConstants.JSON_FILE_PATH_WAIT_CLOSING, errorResponse)
-	}
-
-	@Test
 	@DisplayName("Should return error about value")
-	fun `fail With Negative Value Field`() {
+	fun `fail when negative value for time field received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_INACCURATE_TIMING,
 			"Value field should be exist and in between 0 and 86400.")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
@@ -111,8 +88,8 @@ class RestaurantApplicationTests {
 	}
 
 	@Test
-	@DisplayName("Should return error about non-existing  field")
-	fun `fail With Non-Exist Value Field`() {
+	@DisplayName("Should return error about non-existing field")
+	fun `fail when non-exist value field received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_VALUE_NOT_FOUND,
 			"Value field is required")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
@@ -122,7 +99,7 @@ class RestaurantApplicationTests {
 
 	@Test
 	@DisplayName("Should return error about non-existing type field")
-	fun `fail With Non-Exist Type Field`() {
+	fun `fail when non-exist type field received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_TYPE_NOT_FOUND,
 			"Type field is required")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
@@ -130,7 +107,57 @@ class RestaurantApplicationTests {
 		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_EXIST_TYPE, errorResponse)
 	}
 
-	internal fun sendPostRequest(jsonReqFileName: String, jsonResFileName: String): MvcResult? {
+	@Test
+	@DisplayName("Should return error about unexpected opening time")
+	fun  `fail when unexpected opening time received`() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_OPENING,
+			"Opening time information was not expected")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_OPENING, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about unexpected closing time")
+	fun `fail when unexpected closing time received`() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_CLOSING,
+			"Closing time information was not expected")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_CLOSING, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about time value limitation")
+	fun `fail when time value exceeds max limit`() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_INACCURATE_TIMING,
+			"Value field should be exist and in between 0 and 86400.")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_MAX_VALUE, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about no such day")
+	fun `fail when wrong day value received`() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_NO_SUCH_DAY,
+			"Day names must be one of the followings: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_NO_SUCH_DAY, errorResponse)
+	}
+
+	@Test
+	@DisplayName("Should return error about no such type")
+	fun `fail when wrong type value received`() {
+		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_NO_SUCH_TYPE,
+			"Type names must be one of the followings: [open, close]")
+		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest(TestConstants.JSON_FILE_PATH_NO_SUCH_TYPE, errorResponse)
+	}
+
+	private fun sendPostRequest(jsonReqFileName: String, jsonResFileName: String): MvcResult? {
 		return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).
 		accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
 			.contentType(MediaType.APPLICATION_JSON)
@@ -140,7 +167,7 @@ class RestaurantApplicationTests {
 			.andReturn()
 	}
 
-	internal fun sendPostRequest(jsonFileName: String, errorResponse: ErrorResponse): MvcResult? {
+	private fun sendPostRequest(jsonFileName: String, errorResponse: ErrorResponse): MvcResult? {
 		return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).
 		accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
 			.contentType(MediaType.APPLICATION_JSON)
