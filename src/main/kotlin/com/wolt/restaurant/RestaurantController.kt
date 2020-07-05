@@ -14,6 +14,6 @@ class RestaurantController @Autowired constructor(
 
     @PostMapping(path = [Constants.POST_URI], consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun getReadableOpeningHours(@RequestBody openingHoursInfo: String): ResponseEntity<String> {
-        return ResponseEntity.ok(service.analyzeTimeTable(openingHoursInfo))
+        return ResponseEntity.ok(service.validateInputAndConvertToHashMap(openingHoursInfo))
     }
 }

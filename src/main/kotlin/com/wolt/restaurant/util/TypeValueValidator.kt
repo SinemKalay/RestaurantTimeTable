@@ -16,7 +16,7 @@ class TypeValueValidator {
 
     fun validateScheduleInput(typeValueMap: HashMap<WeekDays, List<TypeValueDTO>>) {
         checkWeekdayNames(typeValueMap.keys)
-        checkTypeValueDTOList(typeValueMap.values)
+        checkDaysIntervalsList(typeValueMap.values)
     }
 
     @Throws(NoSuchDayException::class)
@@ -32,11 +32,11 @@ class TypeValueValidator {
     }
 
     @Throws(NoSuchDayException::class, InaccurateTimingException::class)
-    private fun checkTypeValueDTOList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>) {
-        val outerList: List<List<TypeValueDTO>> = mutListOfObjList.toList()
+    private fun checkDaysIntervalsList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>) {
+        val daysIntervalsList: List<List<TypeValueDTO>> = mutListOfObjList.toList()
 
-        outerList.forEach{innerList->
-            for(typeValueObj in innerList){
+        daysIntervalsList.forEach{intervalList->
+            for(typeValueObj in intervalList){
                 checkTypeField(typeValueObj.type)
                 checkValueField(typeValueObj.value)
             }

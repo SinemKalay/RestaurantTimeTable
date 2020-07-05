@@ -23,22 +23,28 @@ import kotlin.collections.HashMap
 @Service
 class RestaurantService {
 
+   // TODO: intervals could come in any order. Sort the interval by time value
+   // TODO: get rid of global variables
+   // TODO: Correct output of exact hours
+   // TODO: Handle java.lang.NumberFormatException
+
     private var weeklyScheduleList: MutableList<WorkingTimesForADayDTO> = mutableListOf()
     private var sundayClosingTime: Int = 0
 
-    fun analyzeTimeTable(scheduleJsonStr: String): String {
+    fun validateInputAndConvertToHashMap(scheduleJsonStr: String): String {
         val dayToListMap = parseJsonToDTO(scheduleJsonStr)
         TypeValueValidator().validateScheduleInput(dayToListMap)
         getLogger().info("Restaurant working time data is sent to analyze...")
-        analyzeSchedule(dayToListMap)
+        markDayAsClosedOrSendPeriodsOfDaytoExamine(dayToListMap)
 
         return createReadableResponse()
     }
 
-    private fun analyzeSchedule(dayToListMap: HashMap<WeekDays, List<TypeValueDTO>>) {
+    private fun markDayAsClosedOrSendPeriodsOfDaytoExamine(dayToListMap: HashMap<WeekDays, List<TypeValueDTO>>) {
         var dailyDTO = DailyScheduleDTO(day = WeekDays.monday, workingTimesList = mutableListOf(),
             isWaitingForClosingTime = false, isPreviousDayExist = false, timeInt = 0)
         weeklyScheduleList = mutableListOf()
+        sundayClosingTime = 0
         getLogger().info("Narrow down loop according to input")
         val daysInInput = WeekDays.values().filter { d -> dayToListMap.containsKey(d) }
 
@@ -55,14 +61,14 @@ class RestaurantService {
                 else {
                     dailyDTO.isPreviousDayExist = hasPreviousDay
                 }
-                dailyDTO = lookCloserToDay(Pair(currentDay, hoursList), dailyDTO)
+                dailyDTO = examineWorkingPeriodsForaDay(Pair(currentDay, hoursList), dailyDTO)
             }
         }
         isStillWaitingClosingTime(dailyDTO)
         getLogger("Schedule analyze operation has been finished")
     }
 
-    private fun lookCloserToDay(dayHoursListPair: Pair<WeekDays, List<TypeValueDTO>>,
+    private fun examineWorkingPeriodsForaDay(dayHoursListPair: Pair<WeekDays, List<TypeValueDTO>>,
             dailyDTO: DailyScheduleDTO): DailyScheduleDTO {
         val day = dayHoursListPair.first
         val hoursList = dayHoursListPair.second
@@ -72,10 +78,10 @@ class RestaurantService {
         for ((index, typeValueDTO) in hoursList.withIndex()) {
             when (typeValueDTO.type) {
                 TypeEnum.open.name ->
-                    localDailyDTO = openingTimeOperations(localDailyDTO, typeValueDTO.value)
+                    localDailyDTO = checkExceptionsForAnOpeningTimeInfoAndReturnDTO(localDailyDTO, typeValueDTO.value)
 
                 TypeEnum.close.name ->
-                    localDailyDTO = closingTimeOperations(index, localDailyDTO, typeValueDTO.value)
+                    localDailyDTO = checkExceptionsForAClosingTimeInfoAndReturnDTO(index, localDailyDTO, typeValueDTO.value)
             }
         }
         if (!localDailyDTO.isWaitingForClosingTime)
@@ -85,7 +91,7 @@ class RestaurantService {
     }
 
     @Throws(UnmatchedOpenCloseTimeException::class)
-    private fun openingTimeOperations(dailyDTO: DailyScheduleDTO,timeInt: Int): DailyScheduleDTO {
+    private fun checkExceptionsForAnOpeningTimeInfoAndReturnDTO(dailyDTO: DailyScheduleDTO,timeInt: Int): DailyScheduleDTO {
         if (dailyDTO.isWaitingForClosingTime)
             throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_OPENING,
                 "Opening time information was not expected")
@@ -99,7 +105,7 @@ class RestaurantService {
     }
 
     @Throws(UnmatchedOpenCloseTimeException::class, InaccurateTimingException::class)
-    private fun closingTimeOperations(index: Int, dailyDTO: DailyScheduleDTO,
+    private fun checkExceptionsForAClosingTimeInfoAndReturnDTO(index: Int, dailyDTO: DailyScheduleDTO,
               closingTimeInt: Int): DailyScheduleDTO {
         if (dailyDTO.day == WeekDays.monday && dailyDTO.isPreviousDayExist){
             sundayClosingTime= closingTimeInt
@@ -163,7 +169,12 @@ class RestaurantService {
         if (sundayClosingTime!= 0 && dailyDTO.isWaitingForClosingTime){
             addSundayOverNightSchedule(dailyDTO, sundayClosingTime)
         }
-        if (dailyDTO.isWaitingForClosingTime)
+        // RECENTLY ADDED
+        else if (sundayClosingTime!= 0 && !dailyDTO.isWaitingForClosingTime){
+            throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_UNEXP_CLOSING,
+                "Unexpected closing time on Monday")
+        }
+        else if (dailyDTO.isWaitingForClosingTime)
             throw UnmatchedOpenCloseTimeException(Constants.EXP_MSG_WAIT_CLOSING,
                 "Closing time was waited for opening time at the end")
     }
