@@ -67,6 +67,12 @@ project_root/src/test/kotlin/com/wolt/restaurant and right click on it. Then cho
 "Run RestaurantApplicationTests" option. All tests will be run. You can see the results
 in run panel.
 
+Alternatively, postman collection file which named "Wolt.postman_collection.json", under root
+directory, can be used to test the api on Postman. To import the collection file following
+link can be also easily used:
+
+https://www.getpostman.com/collections/3ab715b0d3b6a93b6001
+
 ## Explore Rest API
 As it has been mentioned above, our Rest API has only one endpoint.
 
