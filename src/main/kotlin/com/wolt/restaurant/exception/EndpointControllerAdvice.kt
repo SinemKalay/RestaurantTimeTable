@@ -62,7 +62,7 @@ class EndpointControllerAdvice: ResponseEntityExceptionHandler() {
     }
 
     @ExceptionHandler(JsonParseException::class)
-    fun handleDuplicateKeyException(ex: JsonParseException, req : HttpServletRequest): ResponseEntity<Any> {
+    fun handleJsonParseException(ex: JsonParseException, req : HttpServletRequest): ResponseEntity<Any> {
         val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
             "Malformed JSON request", ex.message.toString())
         return ResponseEntityBuilder().build(errorResponse)

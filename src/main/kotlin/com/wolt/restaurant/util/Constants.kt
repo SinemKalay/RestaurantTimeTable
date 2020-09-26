@@ -2,7 +2,7 @@ package com.wolt.restaurant.util
 
 object Constants {
     const val POST_URI = "/convertTimesToReadableFormat"
-    const val MAX_TIME_VALUE = 86400
+    const val MAX_TIME_VALUE = 86399
     const val MIN_TIME_VALUE = 0
     const val EXP_MSG_WAIT_CLOSING = "Unclosed day exists!"
     const val EXP_MSG_UNEXP_OPENING = "Unexpected opening time!"
