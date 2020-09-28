@@ -7,7 +7,9 @@ import com.wolt.restaurant.util.Constants
 
 data class TypeValueDTO(
     @SerializedName("type") private val _type: String?,
-    @SerializedName("value") private val _value: Int?
+    @SerializedName("value") private val _value: Int?,
+    private var _isOvertime: Boolean = false
+
 ) {
     val type
         get() = _type ?: throw TypeNotFoundException(
@@ -17,9 +19,17 @@ data class TypeValueDTO(
         get() = _value ?: throw TimeValueNotFoundException(
             Constants.EXP_MSG_VALUE_NOT_FOUND, Constants.REASON_VALUE_NOT_FOUND)
 
+    var isOvertime: Boolean
+        get() = _isOvertime
+
+        set(value) {
+            _isOvertime = value
+        }
+    
     init {
         this.type
         this.value
+        this.isOvertime
     }
 }
 

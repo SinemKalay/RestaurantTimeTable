@@ -68,6 +68,14 @@ class EndpointControllerAdvice: ResponseEntityExceptionHandler() {
         return ResponseEntityBuilder().build(errorResponse)
     }
 
+    @ExceptionHandler(NumberFormatException::class)
+    fun handleNumberFormatException(ex: NumberFormatException, req : HttpServletRequest): ResponseEntity<Any> {
+        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString())
+        return ResponseEntityBuilder().build(errorResponse)
+    }
+
+
     override fun handleNoHandlerFoundException(ex: NoHandlerFoundException,
             headers: HttpHeaders, status: HttpStatus,
             request: WebRequest): ResponseEntity<Any> {

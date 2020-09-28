@@ -68,16 +68,6 @@ class RestaurantApplicationTests {
 	}
 
 	@Test
-	@DisplayName("Should return error about opening - closing times are not compatible")
-	fun  `fail when opening time later then closing time`() {
-		val exception= InaccurateTimingException(TestConstants.EXP_MSG_INACCURATE_TIMING,
-			"Opening time can not be later than closing time")
-		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
-		sendPostRequest(TestConstants.JSON_FILE_PATH_INACCURATE_TIMING, errorResponse)
-	}
-
-	@Test
 	@DisplayName("Should return error about value")
 	fun `fail when negative value for time field received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_INACCURATE_TIMING,
@@ -111,7 +101,7 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about unexpected opening time")
 	fun  `fail when unexpected opening time received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_OPENING,
-			"Opening time information was not expected")
+			"Unexpected opening time on saturday")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
 			"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_OPENING, errorResponse)
@@ -121,7 +111,7 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about unexpected closing time")
 	fun `fail when unexpected closing time received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_CLOSING,
-			"Closing time information was not expected")
+			"Unexpected closing time on saturday")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
 			"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_CLOSING, errorResponse)
