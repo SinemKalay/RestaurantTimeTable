@@ -22,8 +22,7 @@ import kotlin.collections.HashMap
 @Service
 class RestaurantService {
 
-   // TODO: Correct output of exact hours
-   // TODO: Refactor unit tests
+    // TODO: Correct output of exact hours
 
     fun processAlgorithmThenReturnResponse(inputJsonStr: String): String{
         val mapDayToHoursList = validateInputAndConvertToHashMap(inputJsonStr)
@@ -41,7 +40,7 @@ class RestaurantService {
     }
 
     private fun processDays(mapDayToHoursList: HashMap<WeekDays,List<TypeValueDTO>>)
-            : MutableList<WorkingTimesForADayDTO>{
+        : MutableList<WorkingTimesForADayDTO>{
         var weeklyScheduleList: MutableList<WorkingTimesForADayDTO> = mutableListOf()
         val daysInInputString = WeekDays.values().filter { d -> mapDayToHoursList.containsKey(d) }
         val mapDayToSortedHoursList = sortAllTimeValues(mapDayToHoursList, daysInInputString)
@@ -61,7 +60,7 @@ class RestaurantService {
     }
 
     private fun sortAllTimeValues(dayToListMap: HashMap<WeekDays, List<TypeValueDTO>>,
-            daysInInputString: List<WeekDays>): HashMap<WeekDays,List<TypeValueDTO>> {
+                                  daysInInputString: List<WeekDays>): HashMap<WeekDays,List<TypeValueDTO>> {
         for (currentDay in daysInInputString) {
             if (!dayToListMap[currentDay].isNullOrEmpty()){
                 val sortedHoursList = dayToListMap[currentDay]!!.sortedBy { it.value }
@@ -72,7 +71,7 @@ class RestaurantService {
     }
 
     private fun checkOtherDaysRestaurantWorking(currentDay: WeekDays,
-            mapDayToSortedHoursListParam: HashMap<WeekDays, List<TypeValueDTO>>): MutableList<String> {
+                                                mapDayToSortedHoursListParam: HashMap<WeekDays, List<TypeValueDTO>>): MutableList<String> {
         var openingTimeSeconds = -1
         var workingTimesList:MutableList<String> = mutableListOf()
         var mapDayToSortedHoursList = mapDayToSortedHoursListParam
@@ -103,8 +102,8 @@ class RestaurantService {
     }
 
     private fun whenTypeIsOpen(currentDay: WeekDays,mapDayToSortedHoursList: HashMap<WeekDays, List<TypeValueDTO>>,
-               typeValueDTO: TypeValueDTO, workingTimesList: MutableList<String>,
-               openingTimeSeconds: Int): Pair<MutableList<String>, Int> {
+                               typeValueDTO: TypeValueDTO, workingTimesList: MutableList<String>,
+                               openingTimeSeconds: Int): Pair<MutableList<String>, Int> {
         var openingTimeSecondsTemp = openingTimeSeconds
         if (typeValueDTO == mapDayToSortedHoursList[currentDay]!!.last()
             && hasNextDayClosingTimeInfo(mapDayToSortedHoursList, currentDay)) {
@@ -123,9 +122,9 @@ class RestaurantService {
     }
 
     private fun whenTypeIsClose(currentDay: WeekDays, mapDayToSortedHoursList: HashMap<WeekDays, List<TypeValueDTO>>,
-                   typeValueDTO: TypeValueDTO, workingTimesList: MutableList<String>,
-                   openingTimeSeconds: Int):
-                    Triple<HashMap<WeekDays, List<TypeValueDTO>>,MutableList<String>, Int> {
+                                typeValueDTO: TypeValueDTO, workingTimesList: MutableList<String>,
+                                openingTimeSeconds: Int):
+        Triple<HashMap<WeekDays, List<TypeValueDTO>>,MutableList<String>, Int> {
         var openingTimeSecondsTemp = openingTimeSeconds
         if (typeValueDTO == mapDayToSortedHoursList[currentDay]!!.first()
             && hasPreviousDayClosingTimeInfoOnCurrentDay(mapDayToSortedHoursList, currentDay)) {
