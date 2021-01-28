@@ -40,30 +40,30 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return readable data for days in request")
 	fun `successful when partial part of week received` () {
 		sendPostRequest(TestConstants.JSON_FILE_PATH_PARTLY_WEEK,
-			TestConstants.RESP_FILE_PATH_PARTLY_WEEK)
+				TestConstants.RESP_FILE_PATH_PARTLY_WEEK)
 	}
 
 	@Test
 	@DisplayName("Should return readable data for whole week")
 	fun `successful when whole week info received`() {
 		sendPostRequest(TestConstants.JSON_FILE_PATH_WHOLE_WEEK,
-			TestConstants.RESP_FILE_PATH_WHOLE_WEEK)
+				TestConstants.RESP_FILE_PATH_WHOLE_WEEK)
 	}
 
 	@Test
 	@DisplayName("Should return readable data for week with sunday overtime")
 	fun `successful when week with Sunday overtime info`() {
 		sendPostRequest(TestConstants.JSON_FILE_PATH_SUNDAY_OVERTIME,
-			TestConstants.RESP_FILE_PATH_SUNDAY_OVERTIME)
+				TestConstants.RESP_FILE_PATH_SUNDAY_OVERTIME)
 	}
 
 	@Test
 	@DisplayName("Should return error about relational days not on sequential order")
 	fun  `fail when non-sequential day info with overnight time` () {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_NON_SEQUENTIAL,
-			"Opening-Closing times must be on same or sequential day")
+				"Opening-Closing times must be on same or sequential day")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_SEQUENTIAL, errorResponse)
 	}
 
@@ -71,9 +71,9 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about value")
 	fun `fail when negative value for time field received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_INACCURATE_TIMING,
-			"Value field should be exist and in between 0 and 86400.")
+				"Value field should be exist and in between 0 and 86400.")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_NEGATIVE_VALUE, errorResponse)
 	}
 
@@ -81,9 +81,9 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about non-existing field")
 	fun `fail when non-exist value field received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_VALUE_NOT_FOUND,
-			"Value field is required")
+				"Value field is required")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_EXIST_VALUE, errorResponse)
 	}
 
@@ -91,9 +91,9 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about non-existing type field")
 	fun `fail when non-exist type field received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_TYPE_NOT_FOUND,
-			"Type field is required")
+				"Type field is required")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_EXIST_TYPE, errorResponse)
 	}
 
@@ -101,9 +101,9 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about unexpected opening time")
 	fun  `fail when unexpected opening time received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_OPENING,
-			"Unexpected opening time on saturday")
+				"Unexpected opening time on saturday")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_OPENING, errorResponse)
 	}
 
@@ -111,60 +111,19 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about unexpected closing time")
 	fun `fail when unexpected closing time received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_CLOSING,
-			"Unexpected closing time on saturday")
+				"Unexpected closing time on saturday")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_UNEXP_CLOSING, errorResponse)
 	}
 
 	@Test
-<<<<<<< HEAD
-	@DisplayName("Should return error about waiting for closing time")
-	fun failWithWaitingForClosing() {
-		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_WAIT_CLOSING,
-			"Closing time was waited for opening time at the end")
-		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
-		sendPostRequest(TestConstants.JSON_FILE_PATH_WAIT_CLOSING, errorResponse)
-	}
-
-	@Test
-	@DisplayName("Should return error about value")
-	fun failWithNegativeValueField() {
-=======
 	@DisplayName("Should return error about time value limitation")
 	fun `fail when time value exceeds max limit`() {
->>>>>>> f5ebd3af7e254ee58a7b2566965c9d092bd980eb
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_INACCURATE_TIMING,
-			"Value field should be exist and in between 0 and 86400.")
+				"Value field should be exist and in between 0 and 86400.")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
-<<<<<<< HEAD
-		sendPostRequest(TestConstants.JSON_FILE_PATH_NEGATIVE_VALUE, errorResponse)
-	}
-
-	@Test
-	@DisplayName("Should return error about non-existing  field")
-	fun failWithNonExistValueField() {
-		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_VALUE_NOT_FOUND,
-			"Value field is required")
-		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
-			"Malformed JSON request", exception.message.toString())
-		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_EXIST_VALUE, errorResponse)
-	}
-
-	@Test
-	@DisplayName("Should return error about non-existing type field")
-	fun failWithNonExistTypeField() {
-		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_TYPE_NOT_FOUND,
-			"Type field is required")
-		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
-			"Malformed JSON request", exception.message.toString())
-		sendPostRequest(TestConstants.JSON_FILE_PATH_NON_EXIST_TYPE, errorResponse)
-	}
-
-	internal fun sendPostRequest(jsonReqFileName: String, jsonResFileName: String): MvcResult? {
-=======
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_MAX_VALUE, errorResponse)
 	}
 
@@ -172,9 +131,9 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about no such day")
 	fun `fail when wrong day value received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_NO_SUCH_DAY,
-			"Day names must be one of the followings: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]")
+				"Day names must be one of the followings: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_NO_SUCH_DAY, errorResponse)
 	}
 
@@ -182,31 +141,30 @@ class RestaurantApplicationTests {
 	@DisplayName("Should return error about no such type")
 	fun `fail when wrong type value received`() {
 		val exception= UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_NO_SUCH_TYPE,
-			"Type names must be one of the followings: [open, close]")
+				"Type names must be one of the followings: [open, close]")
 		val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-			"Malformed JSON request", exception.message.toString())
+				"Malformed JSON request", exception.message.toString())
 		sendPostRequest(TestConstants.JSON_FILE_PATH_NO_SUCH_TYPE, errorResponse)
 	}
 
 	private fun sendPostRequest(jsonReqFileName: String, jsonResFileName: String): MvcResult? {
->>>>>>> f5ebd3af7e254ee58a7b2566965c9d092bd980eb
 		return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).
 		accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(TestUtil().loadJson(jsonReqFileName)))
-			.andExpect(MockMvcResultMatchers.status().isOk)
-			.andExpect(content().string(TestUtil().loadText(jsonResFileName)))
-			.andReturn()
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil().loadJson(jsonReqFileName)))
+				.andExpect(MockMvcResultMatchers.status().isOk)
+				.andExpect(content().string(TestUtil().loadText(jsonResFileName)))
+				.andReturn()
 	}
 
 	private fun sendPostRequest(jsonFileName: String, errorResponse: ErrorResponse): MvcResult? {
 		return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).
 		accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(TestUtil().loadJson(jsonFileName)))
-			.andExpect(jsonPath(TestConstants.ERROR_STATUS).value(errorResponse.status.name))
-			.andExpect(jsonPath(TestConstants.ERROR_NAME).value(errorResponse.error))
-			.andExpect(jsonPath(TestConstants.ERROR_MSG).value(errorResponse.message))
-			.andReturn()
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(TestUtil().loadJson(jsonFileName)))
+				.andExpect(jsonPath(TestConstants.ERROR_STATUS).value(errorResponse.status.name))
+				.andExpect(jsonPath(TestConstants.ERROR_NAME).value(errorResponse.error))
+				.andExpect(jsonPath(TestConstants.ERROR_MSG).value(errorResponse.message))
+				.andReturn()
 	}
 }
