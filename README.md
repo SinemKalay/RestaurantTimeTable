@@ -10,14 +10,17 @@ Spring Boot 2.3.1 + JDK 1.8 + Gradle + Kotlin
 Preferred IDE to run application: Intellij Idea
 
 ### How to run the application
+Application can be executed by several ways.
+
+Restaurant application can be run via docker-compose:
+* Simply, run below command to run the application. It will pull the image from dockerhub repository and expose the api endpoint on port 8080.
+> docker-compose up
 
 Restaurant application can be run via terminal or IDE:
-
 * To run the the application from terminal, execute below command in project root.
-
 > ./gradlew bootRun
 
-* Or, the application can be imported to the IDE to run (prefereably Intellij Idea).After importing, first build and then run the application via the button on top right corner.
+Or, the application can be imported manually to the IDE to run (prefereably Intellij Idea).After importing, first build and then run the application via the button on top right corner.
 
 ### How to call the API
 There is different ways to call an api. As an example below options could be choosen
