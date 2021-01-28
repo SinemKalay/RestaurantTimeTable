@@ -1,6 +1,7 @@
 package com.wolt.restaurant.util
 
 object TestConstants {
+<<<<<<< HEAD
     internal const val POST_URI = "/convertTimesToReadableFormat"
     internal const val JSON_REQUESTS_PATH = "classpath:/static/requestJsonFile/"
     internal const val JSON_RESPONSES_PATH = "classpath:/static/responseFile/"
@@ -27,4 +28,39 @@ object TestConstants {
     internal const val ERROR_NAME = "error"
     internal const val ERROR_MSG = "message"
     internal const val MEDIA_TYPE = "application/json;charset=UTF-8"
+=======
+    const val POST_URI = "/convertTimesToReadableFormat"
+    const val JSON_REQUESTS_PATH = "classpath:/static/requestJsonFile/"
+    const val JSON_RESPONSES_PATH = "classpath:/static/responseFile/"
+    const val JSON_FILE_PATH_WHOLE_WEEK= "WholeWeekInfoRequest.json"
+    const val RESP_FILE_PATH_WHOLE_WEEK= "successResponseToWholeWeekInfo"
+    const val JSON_FILE_PATH_SUNDAY_OVERTIME= "WeekInfoWithSundayOvertime.json"
+    const val RESP_FILE_PATH_SUNDAY_OVERTIME= "successResponseToSundayOvertime"
+    const val JSON_FILE_PATH_PARTLY_WEEK= "PartOfWeekInfoRequest.json"
+    const val RESP_FILE_PATH_PARTLY_WEEK= "successResponseToPartialWeek"
+    const val JSON_FILE_PATH_INACCURATE_TIMING= "InaccurateTimingRequest.json"
+    const val JSON_FILE_PATH_NEGATIVE_VALUE= "NegativeValueFieldRequest.json"
+    const val JSON_FILE_PATH_MAX_VALUE= "MaxValueFieldRequest.json"
+    const val JSON_FILE_PATH_NON_EXIST_VALUE= "NonExistValueFieldRequest.json"
+    const val JSON_FILE_PATH_NON_EXIST_TYPE= "NonExistTypeFieldRequest.json"
+    const val JSON_FILE_PATH_NO_SUCH_DAY= "NoSuchDayRequest.json"
+    const val JSON_FILE_PATH_NO_SUCH_TYPE= "NoSuchTypeRequest.json"
+    const val JSON_FILE_PATH_UNEXP_OPENING= "UnexpectedOpeningTimeRequest.json"
+    const val JSON_FILE_PATH_UNEXP_CLOSING= "UnexpectedClosingTimeRequest.json"
+    const val JSON_FILE_PATH_WAIT_CLOSING= "WaitClosingTimeRequest.json"
+    const val JSON_FILE_PATH_NON_SEQUENTIAL= "DaysNotSequentialRequest.json"
+    const val EXP_MSG_UNEXP_OPENING = "Unexpected opening time!"
+    const val EXP_MSG_UNEXP_CLOSING = "Unexpected closing time!"
+    const val EXP_MSG_WAIT_CLOSING = "Unclosed day exists!"
+    const val EXP_MSG_NON_SEQUENTIAL = "Entered days in working times info are not sequential!"
+    const val EXP_MSG_INACCURATE_TIMING = "Corrupted time value!"
+    const val EXP_MSG_VALUE_NOT_FOUND = "Time value not found!"
+    const val EXP_MSG_TYPE_NOT_FOUND = "Type value not found!"
+    const val EXP_MSG_NO_SUCH_DAY = "No such day found."
+    const val EXP_MSG_NO_SUCH_TYPE = "No such type found."
+    const val ERROR_STATUS = "status"
+    const val ERROR_NAME = "error"
+    const val ERROR_MSG = "message"
+    const val MEDIA_TYPE = "application/json;charset=UTF-8"
+>>>>>>> f5ebd3af7e254ee58a7b2566965c9d092bd980eb
 }
