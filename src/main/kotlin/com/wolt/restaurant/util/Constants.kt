@@ -1,10 +1,9 @@
 package com.wolt.restaurant.util
 
 object Constants {
-    const val POST_URI = "/convertTimesToReadableFormat"
+    const val POST_URI = "/convertTimetableToReadableFormat"
     const val MAX_TIME_VALUE = 86399
     const val MIN_TIME_VALUE = 0
-    const val EXP_MSG_WAIT_CLOSING = "Unclosed day exists!"
     const val EXP_MSG_UNEXP_OPENING = "Unexpected opening time!"
     const val EXP_MSG_UNEXP_CLOSING = "Unexpected closing time!"
     const val EXP_MSG_NON_SEQUENTIAL = "Entered days in working times info are not sequential!"
@@ -21,6 +20,4 @@ object Constants {
     const val EXP_MSG_NO_SUCH_TYPE = "No such type found."
     const val REASON_NO_SUCH_TYPE = "Type names must be one of the followings:"
     const val ALL_DAY_CLOSED = "Closed"
-    const val DEFAULT_TIMEZONE = "GMT"
-    const val HOUR_FORMAT_12 = "hh:mm a"
 }

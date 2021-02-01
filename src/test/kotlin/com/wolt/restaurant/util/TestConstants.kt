@@ -1,7 +1,7 @@
 package com.wolt.restaurant.util
 
 object TestConstants {
-    const val POST_URI = "/convertTimesToReadableFormat"
+    const val POST_URI = "/convertTimetableToReadableFormat"
     const val JSON_REQUESTS_PATH = "classpath:/static/requestJsonFile/"
     const val JSON_RESPONSES_PATH = "classpath:/static/responseFile/"
     const val JSON_FILE_PATH_WHOLE_WEEK= "WholeWeekInfoRequest.json"

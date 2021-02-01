@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class RestaurantController @Autowired constructor(
-        private val service: RestaurantService) {
+    private val service: RestaurantService) {
 
     @PostMapping(path = [Constants.POST_URI], consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun getReadableOpeningHours(@RequestBody openingHoursInfo: String): ResponseEntity<String> {
-        return ResponseEntity.ok(service.processAlgorithmThenReturnResponse(openingHoursInfo))
+    fun postTimetableInput(@RequestBody openingHoursInfo: String): ResponseEntity<String> {
+        val readableSchedule = service.processTimetableReturnReadableSchedule(openingHoursInfo)
+        return ResponseEntity.ok(readableSchedule)
     }
 }

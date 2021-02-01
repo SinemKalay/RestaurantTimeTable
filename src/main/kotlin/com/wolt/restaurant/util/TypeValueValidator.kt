@@ -14,9 +14,10 @@ import kotlin.collections.HashMap
 
 class TypeValueValidator {
 
-    fun validateScheduleInput(typeValueMap: HashMap<WeekDays, List<TypeValueDTO>>) {
+    fun validateTimetableInput(typeValueMap: HashMap<WeekDays, List<TypeValueDTO>>) {
+        getLogger().info("Validate timetable input")
         checkWeekdayNames(typeValueMap.keys)
-        checkDaysIntervalsList(typeValueMap.values)
+        checkDayIntervalsList(typeValueMap.values)
     }
 
     @Throws(NoSuchDayException::class)
@@ -26,13 +27,13 @@ class TypeValueValidator {
             if(!WeekDays.values().contains(d)){
                 val usableDays = WeekDays.values().contentToString()
                 throw NoSuchDayException(EXP_MSG_NO_SUCH_DAY,
-                        "$REASON_NO_SUCH_DAY $usableDays")
+                    "$REASON_NO_SUCH_DAY $usableDays")
             }
         }
     }
 
     @Throws(NoSuchDayException::class, InaccurateTimingException::class)
-    private fun checkDaysIntervalsList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>) {
+    private fun checkDayIntervalsList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>) {
         val daysIntervalsList: List<List<TypeValueDTO>> = mutListOfObjList.toList()
 
         daysIntervalsList.forEach{intervalList->
@@ -47,13 +48,13 @@ class TypeValueValidator {
         if(type != TypeEnum.open.name && type != TypeEnum.close.name){
             val usableTypes = TypeEnum.values().contentToString()
             throw NoSuchTypeException(EXP_MSG_NO_SUCH_TYPE,
-                    "$REASON_NO_SUCH_TYPE $usableTypes")
+                "$REASON_NO_SUCH_TYPE $usableTypes")
         }
     }
 
     private fun checkValueField(value: Int) {
         if(value < MIN_TIME_VALUE || value > MAX_TIME_VALUE)
             throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING,
-                    Constants.REASON_INACCURATE_TIMING_VALUE)
+                Constants.REASON_INACCURATE_TIMING_VALUE)
     }
 }
