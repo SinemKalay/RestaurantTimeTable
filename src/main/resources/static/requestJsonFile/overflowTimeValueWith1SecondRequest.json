@@ -2,7 +2,7 @@
   "friday" : [
     {
       "type" : "open",
-      "value" : 64800
+      "value" : 86400
     }
   ],
   "saturday": [
@@ -16,7 +16,15 @@
     },
     {
       "type" : "close",
-      "value" : 29600
+      "value" : 39600
+    },
+    {
+      "type" : "open",
+      "value" : 57600
+    },
+    {
+      "type" : "close",
+      "value" : 82800
     }
   ]
 }

@@ -12,19 +12,11 @@
     },
     {
       "type" : "open",
-      "value" : 32400
+      "value" : 100000
     },
     {
       "type" : "close",
       "value" : 39600
-    },
-    {
-      "type" : "open",
-      "value" : 57600
-    },
-    {
-      "type" : "close",
-      "value" : 82800
     }
   ]
 }
