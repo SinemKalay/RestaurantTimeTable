@@ -12,9 +12,10 @@ Preferred IDE to run application: Intellij Idea
 ### How to run the application
 Application can be executed by several ways.
 
-Restaurant application can be run via docker-compose:
-* Simply, run below command to run the application. It will pull the image from dockerhub repository and expose the api endpoint on port 8080.
-> docker-compose up
+Restaurant application can be run via run.sh script:
+* This line below will build docker image by compiling the project and run the docker container on port 8080.
+  Please note that, the script requires to have docker framework.
+> ./run.sh
 
 Restaurant application can be run via terminal or IDE:
 * To run the the application from terminal, execute below command in project root.
@@ -32,7 +33,7 @@ Postman can be used to call rest api after run the application.
 3. Enter URL as "http://localhost:8080/convertTimesToReadableFormat"
 4. Choose one of request body sample from resources/static/requestJsonFile
 
-NOTE: Wolt.postman_collection.json in the project root can be also imported
+NOTE: Wolt.postman_collection_v2.json in the project root can be also imported
 easily.
 
 * Via Curl command
@@ -130,9 +131,11 @@ You can find some of custom exceptions below;
 * TimeValueNotFoundException
 * RespBodyNotFoundException
 
-As well as the custome exceptions above has been handled, some of
+As well as the custom exceptions above has been handled, some of
 well-known exceptions' handlers have been overridden to give more
 precise messages;
+* JsonSyntaxException
+* JsonParseException
 * NoHandlerFoundException
 * HttpMessageNotReadableException
 * HttpMediaTypeNotSupportedException
@@ -191,8 +194,8 @@ That kind of structure would have below advantages:
 * It makes easier to understand data
 * Mapping json to obj would be possible at controller phase
 * It eliminates the possiblity of unmatched open-close exceptions:
-  	no need to searching for open and closing time in different object, 
-	no need to checking whether open-close times is in correct sequence
+    no need to searching for open and closing time in different object,
+    no need to checking whether open-close times is in correct sequence
 
 NOTE: Constraint of that structure in case of opening time - closing time
 are not on the same day, time value of closing time would be limited by max

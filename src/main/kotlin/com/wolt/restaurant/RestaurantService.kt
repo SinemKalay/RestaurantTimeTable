@@ -13,7 +13,6 @@ import com.wolt.restaurant.util.TypeValueValidator
 import com.wolt.restaurant.util.WeekDays
 import com.wolt.restaurant.util.getLogger
 import org.springframework.stereotype.Service
-import java.lang.NumberFormatException
 import java.util.concurrent.TimeUnit
 import kotlin.collections.HashMap
 
@@ -39,13 +38,14 @@ class RestaurantService {
             : MutableList<DayIntervalsDTO> {
         val weeklyScheduleList: MutableList<DayIntervalsDTO> = mutableListOf()
         val daysInTimetable = WeekDays.values().filter { d -> mapDayIntervalList.containsKey(d) }
-        val mapDaySortedHoursList = sortTimeValues(mapDayIntervalList, daysInTimetable)
+        val mapSortedDayIntervalList = sortTimeValues(mapDayIntervalList, daysInTimetable)
+
         for (currentDay in daysInTimetable.reversed()) {
-            val hoursList = mapDayIntervalList.getValue(currentDay)
-            if (hoursList.isEmpty()) {
+            val intervalList = mapSortedDayIntervalList.getValue(currentDay)
+            if (intervalList.isEmpty()) {
                 weeklyScheduleList.add(markDayAsClosed(currentDay))
             } else {
-                val listIntervalsOfCurrentDay = getIntervalsList(currentDay, mapDaySortedHoursList)
+                val listIntervalsOfCurrentDay = getIntervalsList(currentDay, mapSortedDayIntervalList)
                 val dayIntervalsDTO = DayIntervalsDTO(currentDay, listIntervalsOfCurrentDay)
                 weeklyScheduleList.add(dayIntervalsDTO)
             }
