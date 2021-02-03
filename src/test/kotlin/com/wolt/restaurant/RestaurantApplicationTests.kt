@@ -1,5 +1,6 @@
 package com.wolt.restaurant
 
+import com.google.gson.JsonSyntaxException
 import com.wolt.restaurant.exception.InaccurateTimingException
 import com.wolt.restaurant.exception.NoSuchDayException
 import com.wolt.restaurant.exception.NoSuchTypeException
@@ -33,26 +34,26 @@ import java.time.LocalDateTime
 @SpringBootTest
 class RestaurantApplicationTests {
 
-    @Autowired
-    lateinit var webApplicationContext: WebApplicationContext
-    lateinit var mockMvc: MockMvc
+	@Autowired
+	lateinit var webApplicationContext: WebApplicationContext
+	lateinit var mockMvc: MockMvc
 
-    @BeforeEach
-    fun beforeEach() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build()
-    }
+	@BeforeEach
+	fun beforeEach() {
+		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build()
+	}
 
-    @Test
-    @DisplayName("Should return timetable for whole week")
-    fun `successful when whole week info received`() {
-        sendPostRequest("wholeWeekInfoRequest.json", "successResponseWholeWeekInfo")
-    }
+	@Test
+	@DisplayName("Should return timetable for whole week")
+	fun `successful when whole week info received`() {
+		sendPostRequest("wholeWeekInfoRequest.json", "successResponseWholeWeekInfo")
+	}
 
-    @Test
-    @DisplayName("Should return timetable for days in request")
-    fun `successful when partial part of week received`() {
-        sendPostRequest("partialWeekRequest.json", "successResponsePartialWeek")
-    }
+	@Test
+	@DisplayName("Should return timetable for days in request")
+	fun `successful when partial part of week received`() {
+		sendPostRequest("partialWeekRequest.json", "successResponsePartialWeek")
+	}
 
 	@Test
 	@DisplayName("Should return timetable with sorted intervals")
@@ -72,11 +73,11 @@ class RestaurantApplicationTests {
 		sendPostRequest("closeComesBeforeOpenRequest.json", "successResponseCloseComesFirst")
 	}
 
-    @Test
-    @DisplayName("Should return timetable for week with sunday overtime")
-    fun `successful when week with Sunday overtime info`() {
-        sendPostRequest("weekInfoWithSundayOvertime.json", "successResponseSundayOvertime")
-    }
+	@Test
+	@DisplayName("Should return timetable for week with sunday overtime")
+	fun `successful when week with Sunday overtime info`() {
+		sendPostRequest("weekInfoWithSundayOvertime.json", "successResponseSundayOvertime")
+	}
 
 	@Test
 	@DisplayName("Should return timetable for closed week")
@@ -165,15 +166,15 @@ class RestaurantApplicationTests {
 		sendPostRequest("unexpectedClosingTimeRequest.json", errorResponse)
 	}
 
-    @Test
-    @DisplayName("Should return error about unexpected opening time")
-    fun `fail when unexpected opening time received`() {
-        val exception = UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_OPENING,
-            "Unexpected opening time on saturday")
-        val errorResponse = ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", exception.message.toString())
-        sendPostRequest("unexpectedOpeningTimeRequest.json", errorResponse)
-    }
+	@Test
+	@DisplayName("Should return error about unexpected opening time")
+	fun `fail when unexpected opening time received`() {
+		val exception = UnmatchedOpenCloseTimeException(TestConstants.EXP_MSG_UNEXP_OPENING,
+			"Unexpected opening time on saturday")
+		val errorResponse = ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest("unexpectedOpeningTimeRequest.json", errorResponse)
+	}
 
 	@Test
 	@DisplayName("Should return error about days must be sequential when overnight time exists")
@@ -195,22 +196,32 @@ class RestaurantApplicationTests {
 		sendPostRequest("unclosedDayRequest.json", errorResponse)
 	}
 
-	private fun sendPostRequest(jsonReqFileName: String, jsonResFileName: String): MvcResult? {
-        return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil().loadJson(jsonReqFileName)))
-            .andExpect(MockMvcResultMatchers.status().isOk)
-            .andExpect(content().string(TestUtil().loadText(jsonResFileName)))
-            .andReturn()
-    }
+	@Test
+	@DisplayName("Should return error about time value constraints")
+	fun `fail when time value input exceeds int max value`() {
+		val exception = InaccurateTimingException("java.lang.NumberFormatException:",
+			"Time value should be an int between 0 to 86399")
+		val errorResponse = ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+			"Malformed JSON request", exception.message.toString())
+		sendPostRequest("timeValueExceedMaxInt.json", errorResponse)
+	}
 
-    private fun sendPostRequest(jsonFileName: String, errorResponse: ErrorResponse): MvcResult? {
-        return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil().loadJson(jsonFileName)))
-            .andExpect(jsonPath(TestConstants.ERROR_STATUS).value(errorResponse.status.name))
-            .andExpect(jsonPath(TestConstants.ERROR_NAME).value(errorResponse.error))
-            .andExpect(jsonPath(TestConstants.ERROR_MSG).value(errorResponse.message))
-            .andReturn()
-    }
+	private fun sendPostRequest(jsonReqFileName: String, jsonResFileName: String): MvcResult? {
+		return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(TestUtil().loadJson(jsonReqFileName)))
+			.andExpect(MockMvcResultMatchers.status().isOk)
+			.andExpect(content().string(TestUtil().loadText(jsonResFileName)))
+			.andReturn()
+	}
+
+	private fun sendPostRequest(jsonFileName: String, errorResponse: ErrorResponse): MvcResult? {
+		return mockMvc.perform(MockMvcRequestBuilders.post(TestConstants.POST_URI).accept(MediaType.parseMediaType(TestConstants.MEDIA_TYPE))
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(TestUtil().loadJson(jsonFileName)))
+			.andExpect(jsonPath(TestConstants.ERROR_STATUS).value(errorResponse.status.name))
+			.andExpect(jsonPath(TestConstants.ERROR_NAME).value(errorResponse.error))
+			.andExpect(jsonPath(TestConstants.ERROR_MSG).value(errorResponse.message))
+			.andReturn()
+	}
 }

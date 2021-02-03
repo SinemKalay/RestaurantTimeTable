@@ -1,6 +1,7 @@
 package com.wolt.restaurant.exception
 
 import com.google.gson.JsonParseException
+import com.google.gson.JsonSyntaxException
 import com.wolt.restaurant.util.ErrorResponse
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -65,6 +66,19 @@ class EndpointControllerAdvice: ResponseEntityExceptionHandler() {
     fun handleJsonParseException(ex: JsonParseException, req: HttpServletRequest): ResponseEntity<Any> {
         val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
             "Malformed JSON request", ex.message.toString())
+        return ResponseEntityBuilder().build(errorResponse)
+    }
+
+    @ExceptionHandler(JsonSyntaxException::class)
+    fun handleJsonSyntaxException(ex: JsonSyntaxException, req: HttpServletRequest): ResponseEntity<Any> {
+        var errorResponse: ErrorResponse = if(ex.message!!.contains("java.lang.NumberFormatException")){
+            ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+                "Malformed JSON request",
+                "java.lang.NumberFormatException: Time value should be an int between 0 to 86399")
+        } else {
+            ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+                "Malformed JSON request", ex.message.toString())
+        }
         return ResponseEntityBuilder().build(errorResponse)
     }
 

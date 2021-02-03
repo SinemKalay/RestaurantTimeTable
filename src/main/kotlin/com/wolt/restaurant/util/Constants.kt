@@ -1,7 +1,7 @@
 package com.wolt.restaurant.util
 
 object Constants {
-    const val POST_URI = "/convertTimetableToReadableFormat"
+    const val POST_URI = "/restaurantTimetable"
     const val MAX_TIME_VALUE = 86399
     const val MIN_TIME_VALUE = 0
     const val EXP_MSG_UNEXP_OPENING = "Unexpected opening time!"

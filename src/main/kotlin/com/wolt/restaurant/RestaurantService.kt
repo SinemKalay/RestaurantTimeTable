@@ -13,6 +13,7 @@ import com.wolt.restaurant.util.TypeValueValidator
 import com.wolt.restaurant.util.WeekDays
 import com.wolt.restaurant.util.getLogger
 import org.springframework.stereotype.Service
+import java.lang.NumberFormatException
 import java.util.concurrent.TimeUnit
 import kotlin.collections.HashMap
 

@@ -1,0 +1,2143 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Wolt",
+		"_postman_id": "1601c17b-08cc-7c21-810d-e5c1aea08852",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Success when whole week schedule entered properly",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"monday\" : [],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"wednesday\" : [],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "4c33f0c8-3dd4-440f-9268-2a9b8474589c",
+					"name": "Success when whole week schedule entered properly",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"monday\" : [],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"wednesday\" : [],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "163",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:02:16 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 28,
+					"body": "Restaurant is open:\nMonday: Closed\nTuesday: 10 AM - 6 PM\nWednesday: Closed\nThursday: 10 AM - 6 PM\nFriday: 10 AM - 1 AM\nSaturday: 10 AM - 1 AM\nSunday: 12 PM - 9 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when days are not in order",
+			"request": {
+				"url": "http://localhost:8080/convertTimetableToReadableFormat",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"monday\" : [],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n    \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"wednesday\" : [],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "613f6fe4-b0b0-4d27-88d0-e0ef153038c0",
+					"name": "Success when days are not in order",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"monday\" : [],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n    \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"wednesday\" : [],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "163",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:05:07 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 25,
+					"body": "Restaurant is open:\nMonday: Closed\nTuesday: 10 AM - 6 PM\nWednesday: Closed\nThursday: 10 AM - 6 PM\nFriday: 10 AM - 1 AM\nSaturday: 10 AM - 1 AM\nSunday: 12 PM - 9 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when partial week schedule",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ],\n    \"sunday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 0\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 12000\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "52055d41-830f-4d5f-85f0-5f20a1d6c29c",
+					"name": "Success when partial week schedule",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ],\n    \"sunday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 0\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 12000\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "101",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 21:08:07 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 26,
+					"body": "Restaurant is open:\nFriday: 6 PM - 1 AM\nSaturday: 9 AM - 11 AM, 4 PM - 11 PM\nSunday: 12 AM - 3.20 AM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when close come before open in interval",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "6373a002-699c-48ea-b88f-96ab0ce14dd7",
+					"name": "Success when close come before open in interval",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "77",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:07:34 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 25,
+					"body": "Restaurant is open:\nFriday: 6 PM - 1 AM\nSaturday: 9 AM - 11 AM, 4 PM - 11 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when intervals out of order",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n  \t{\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "c6dcf37c-fca2-42a8-a6ce-db20e8ff8499",
+					"name": "Success when intervals out of order",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n  \t{\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "77",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:07:49 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 24,
+					"body": "Restaurant is open:\nFriday: 6 PM - 1 AM\nSaturday: 9 AM - 11 AM, 4 PM - 11 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when sunday overtime occurs",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"monday\" : [\n  \t{\n  \t  \"type\" : \"close\",\n      \"value\" : 3000\n    }\n  ],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"wednesday\" : [],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    },\n    {\n      \"type\": \"open\",\n      \"value\": 82000\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "52aaac71-7954-4569-b55c-53d78ea12bcd",
+					"name": "Success when sunday overtime occurs",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"monday\" : [\n  \t{\n  \t  \"type\" : \"close\",\n      \"value\" : 3000\n    }\n  ],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"wednesday\" : [],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    },\n    {\n      \"type\": \"open\",\n      \"value\": 82000\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "187",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:08:16 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 23,
+					"body": "Restaurant is open:\nMonday: Closed\nTuesday: 10 AM - 6 PM\nWednesday: Closed\nThursday: 10 AM - 6 PM\nFriday: 10 AM - 1 AM\nSaturday: 10 AM - 1 AM\nSunday: 12 PM - 9 PM, 10.46:40 PM - 12.50 AM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when closed all week",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tuesday\": [],\n  \"monday\":  [],\n  \"wednesday\": [],\n  \"thursday\": [],\n  \"friday\": [],\n  \"saturday\": [],\n  \"sunday\": []\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "9a4762cf-d220-439b-925f-81165c78b426",
+					"name": "Success when closed all week",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tuesday\": [],\n  \"monday\":  [],\n  \"wednesday\": [],\n  \"thursday\": [],\n  \"friday\": [],\n  \"saturday\": [],\n  \"sunday\": []\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "133",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:08:39 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 27,
+					"body": "Restaurant is open:\nMonday: Closed\nTuesday: Closed\nWednesday: Closed\nThursday: Closed\nFriday: Closed\nSaturday: Closed\nSunday: Closed\n"
+				}
+			]
+		},
+		{
+			"name": "Success when open for a second",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 6000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 6001\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "38440a36-3fb3-4c0e-96c2-cc7fb09e6dbd",
+					"name": "Success when open for a second",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 6000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 6001\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "99",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:56:48 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 28,
+					"body": "Restaurant is open:\nFriday: 6 PM - 1 AM\nSaturday: 1.40 AM - 1.40:01 AM, 9 AM - 11 AM, 4 PM - 11 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when open for a minute",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 6000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 6060\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "2540e702-4b82-459c-b2ab-ce809e45e105",
+					"name": "Success when open for a minute",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 6000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 6060\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "96",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:09:06 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 23,
+					"body": "Restaurant is open:\nFriday: 6 PM - 1 AM\nSaturday: 1.40 AM - 1.41 AM, 9 AM - 11 AM, 4 PM - 11 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Success when open for 59 minutes",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 6000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 9540\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "ea9e7f29-89eb-47dc-93f0-0026393aeefd",
+					"name": "Success when open for 59 minutes",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 6000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 9540\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "96",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:10:25 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 24,
+					"body": "Restaurant is open:\nFriday: 6 PM - 1 AM\nSaturday: 1.40 AM - 2.39 AM, 9 AM - 11 AM, 4 PM - 11 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Fails when time value exceeds  int max value",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 214748364214748364\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "47a4012e-e4f8-479b-98c8-2cfb56a4ad93",
+					"name": "Success when partial week schedule",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "99",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Mon, 01 Feb 2021 18:15:05 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 24,
+					"body": "Restaurant is open:\nFriday: 06:00 PM - 01:00 AM\nSaturday: 09:00 AM - 11:00 AM, 04:00 PM - 11:00 PM\n"
+				}
+			]
+		},
+		{
+			"name": "Fail with overflow time with 1 second",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 86400\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "0cf32f4b-65c1-4081-bb70-2a960616bbdf",
+					"name": "Fail with overflow time with 1 second",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 86400\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:10:51 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 195,
+					"body": "{\"timestamp\":\"2021-02-02T21:10:51.002\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Corrupted time value! Value field should be exist and in between 0 and 86400.\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails when double monday",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\t\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "d779e4a1-e481-4dac-8f5e-aad543001505",
+					"name": "Fails when double monday",
+					"originalRequest": {
+						"url": "http://localhost:8080/restaurantTimetable",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\t\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 03 Feb 2021 15:29:56 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 25,
+					"body": "{\"timestamp\":\"2021-02-03T17:29:56.813\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"duplicate key: friday\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with negative time value",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : -20\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "d7340502-f6c3-4aeb-95fd-79667ccda450",
+					"name": "Fails with negative time value",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : -20\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:45:51 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 26,
+					"body": "{\"timestamp\":\"2020-07-03T00:45:51.804\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Corrupted time value! Value field should be exist and in between 0 and 86400.\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with non-exist type value",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "69b7e670-413d-4502-96e6-dd2544437d07",
+					"name": "Fails with non-exist type value",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    }\n  ]\n}"
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:45:47 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 42,
+					"body": "{\"timestamp\":\"2020-07-03T00:45:47.069\",\"status\":\"NOT_FOUND\",\"error\":\"Malformed JSON request\",\"message\":\"Type value not found! Type field is required\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with non-exist time value",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\"\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "71a91ffd-9d5c-4199-bc59-fcebefd4139f",
+					"name": "Fails with non-exist time value",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\"\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    }\n  ]\n}"
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:45:42 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 22,
+					"body": "{\"timestamp\":\"2020-07-03T00:45:42.552\",\"status\":\"NOT_FOUND\",\"error\":\"Malformed JSON request\",\"message\":\"Time value not found! Value field is required\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails when no such type name",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"wrongTypeName\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "5e6674a0-5042-4f4c-b0e0-c6cea23143cf",
+					"name": "Fails when no such type name",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"wrongTypeName\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:45:27 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 24,
+					"body": "{\"timestamp\":\"2020-07-03T00:45:27.675\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"No such type found. Type names must be one of the followings: [open, close]\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails when no such day name",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"randomDay\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "6cb9c224-dd1a-4f62-94d5-6a79ef87023b",
+					"name": "Fails when no such day name",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"randomDay\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:45:22 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 23,
+					"body": "{\"timestamp\":\"2020-07-03T00:45:22.106\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"No such day found. Day names must be one of the followings: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails when unexpected closing object received",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "a3988aa7-1c5b-48b0-8223-51b4f1569dbf",
+					"name": "Fails when unexpected closing object received",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:45:37 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 25,
+					"body": "{\"timestamp\":\"2020-07-03T00:45:37.965\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unexpected closing time! Closing time information was not expected\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails when unexpected opening object received",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "6b6de980-5566-4f8b-9552-8aa759ac7dec",
+					"name": "Fails when unexpected opening object received",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:45:33 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 25,
+					"body": "{\"timestamp\":\"2020-07-03T00:45:33.461\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unexpected opening time! Opening time information was not expected\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails when non-sequential days comes in a row with related open-close time",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"sunday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "8b5809ed-0528-4b82-9685-9b1e22ede609",
+					"name": "Fails when non-sequential days comes in a row with related open-close time",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"sunday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Thu, 02 Jul 2020 21:28:30 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 43,
+					"body": "{\"timestamp\":\"2020-07-03T00:28:30.189\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Entered days in working times info are not sequential! Opening-Closing times must be on same or sequential day\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails when there is no closing time at the end",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "bd42a950-deff-4d64-afaf-a9c80d560345",
+					"name": "Fails when there is no closing time at the end",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 22 Sep 2020 09:09:25 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 330,
+					"body": "{\"timestamp\":\"2020-09-22T12:09:25.142\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unclosed day exists! Closing time was waited for opening time at the end\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with missing request body",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "http://localhost:8080/convertTimesToReadableFormat"
+			},
+			"response": [
+				{
+					"id": "02ef3586-3d3e-4652-84e0-eb9371ffc9c4",
+					"name": "Fails with missing request body",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 22 Sep 2020 09:11:20 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 367,
+					"body": "{\"timestamp\":\"2020-09-22T12:11:20.651\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Required request body is missing: public org.springframework.http.ResponseEntity<java.lang.String> com.wolt.restaurant.RestaurantController.getReadableOpeningHours(java.lang.String)\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with unsupported Media Type",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "http://localhost:8080/convertTimesToReadableFormat"
+			},
+			"response": [
+				{
+					"id": "62eed54e-8c45-4801-8642-016774efb7dd",
+					"name": "Fails with unsupported Media Type",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {}
+					},
+					"status": "Unsupported Media Type",
+					"code": 415,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 22 Sep 2020 09:30:52 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 354,
+					"body": "{\"timestamp\":\"2020-09-22T12:30:52.975\",\"status\":\"UNSUPPORTED_MEDIA_TYPE\",\"error\":\"Unsupported media type\",\"message\":\"Content type 'application/x-www-form-urlencoded' not supported\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with unsupported request method",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "http://localhost:8080/convertTimesToReadableFormat"
+			},
+			"response": [
+				{
+					"id": "1198d760-90b7-4e42-9f78-bb056d435cef",
+					"name": "Fails with unsupported request method",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {}
+					},
+					"status": "Method Not Allowed",
+					"code": 405,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 22 Sep 2020 09:14:46 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 357,
+					"body": "{\"timestamp\":\"2020-09-22T12:14:46.152\",\"status\":\"METHOD_NOT_ALLOWED\",\"error\":\"Unsupported request method\",\"message\":\"Request method 'GET' not supported\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with malformed request body",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },value\" : 82800\n    }\n  ]\n}"
+				},
+				"description": "http://localhost:8080/convertTimesToReadableFormat"
+			},
+			"response": [
+				{
+					"id": "5f8266cd-cdff-431f-b21f-d948bd01be71",
+					"name": "Fails with malformed request body",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },value\" : 82800\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 22 Sep 2020 09:24:05 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 331,
+					"body": "{\"timestamp\":\"2020-09-22T12:24:05.947\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"com.google.gson.stream.MalformedJsonException: Expected name at line 8 column 6 path $.\"}"
+				}
+			]
+		},
+		{
+			"name": "Fails with unexpected closing time on Monday when sunday info also exists",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"monday\" : [\n  \t{\n  \t  \"type\" : \"close\",\n      \"value\" : 3000\n    }\n  ],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"wednesday\" : [],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    }\n  ]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "a7efb6c6-3ef4-4f52-b9c5-e2f1481f179b",
+					"name": "Fails with unexpected closing time on Monday when sunday info also exists",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"monday\" : [\n  \t{\n  \t  \"type\" : \"close\",\n      \"value\" : 3000\n    }\n  ],\n  \"tuesday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"wednesday\" : [],\n  \"thursday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 64800\n    }\n  ],\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"saturday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 36000\n    }\n  ],\n  \"sunday\" : [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 43200\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 75600\n    }\n  ]\n}"
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 22 Sep 2020 10:35:06 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 188,
+					"body": "{\"timestamp\":\"2020-09-22T13:35:06.362\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unexpected closing time! Unexpected closing time on Monday\"}"
+				}
+			]
+		},
+		{
+			"name": "Success with valid feedback input",
+			"request": {
+				"url": "http://localhost:8080/restaurantTimetable",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tuesday\": [],\n  \"monday\": [\n    {\n      \"type\": \"close\",\n      \"value\": 1800\n    },\n    {\n      \"type\": \"open\",\n      \"value\": 0\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 7200\n    },\n    {\n      \"type\": \"open\",\n      \"value\": 3600\n    }\n  ],\n  \"wednesday\": [],\n  \"thursday\": [],\n  \"friday\": [],\n  \"saturday\": [],\n  \"sunday\": []\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "e7b8e3d4-741c-4c0c-a594-f89a059475ca",
+					"name": "Success with valid feedback input",
+					"originalRequest": {
+						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tuesday\": [],\n  \"monday\": [\n    {\n      \"type\": \"close\",\n      \"value\": 1800\n    },\n    {\n      \"type\": \"open\",\n      \"value\": 0\n    },\n    {\n      \"type\": \"close\",\n      \"value\": 7200\n    },\n    {\n      \"type\": \"open\",\n      \"value\": 3600\n    }\n  ],\n  \"wednesday\": [],\n  \"thursday\": [],\n  \"friday\": [],\n  \"saturday\": [],\n  \"sunday\": []\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plainText",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "156",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "text/plain;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Tue, 02 Feb 2021 19:57:25 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 25,
+					"body": "Restaurant is open:\nMonday: 12 AM - 12.30 AM, 1 AM - 2 AM\nTuesday: Closed\nWednesday: Closed\nThursday: Closed\nFriday: Closed\nSaturday: Closed\nSunday: Closed\n"
+				}
+			]
+		}
+	]
+}
