@@ -27,7 +27,7 @@
 			},
 			"response": [
 				{
-					"id": "4c33f0c8-3dd4-440f-9268-2a9b8474589c",
+					"id": "385abc5b-0df8-4b10-8948-14dd729f5dab",
 					"name": "Success when whole week schedule entered properly",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -89,7 +89,7 @@
 		{
 			"name": "Success when days are not in order",
 			"request": {
-				"url": "http://localhost:8080/convertTimetableToReadableFormat",
+				"url": "http://localhost:8080/restaurantTimetable",
 				"method": "POST",
 				"header": [
 					{
@@ -106,10 +106,10 @@
 			},
 			"response": [
 				{
-					"id": "613f6fe4-b0b0-4d27-88d0-e0ef153038c0",
+					"id": "f91d1b51-49ac-40ed-ad11-8a165443cf5a",
 					"name": "Success when days are not in order",
 					"originalRequest": {
-						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"url": "http://localhost:8080/restaurantTimetable",
 						"method": "POST",
 						"header": [
 							{
@@ -149,7 +149,7 @@
 						{
 							"name": "date",
 							"key": "date",
-							"value": "Tue, 02 Feb 2021 19:05:07 GMT",
+							"value": "Thu, 04 Feb 2021 00:40:48 GMT",
 							"description": "The date and time that the message was sent"
 						},
 						{
@@ -160,7 +160,7 @@
 						}
 					],
 					"cookie": [],
-					"responseTime": 25,
+					"responseTime": 27,
 					"body": "Restaurant is open:\nMonday: Closed\nTuesday: 10 AM - 6 PM\nWednesday: Closed\nThursday: 10 AM - 6 PM\nFriday: 10 AM - 1 AM\nSaturday: 10 AM - 1 AM\nSunday: 12 PM - 9 PM\n"
 				}
 			]
@@ -185,7 +185,7 @@
 			},
 			"response": [
 				{
-					"id": "52055d41-830f-4d5f-85f0-5f20a1d6c29c",
+					"id": "36c16fdc-8d8f-4169-8b03-0551c19c9c99",
 					"name": "Success when partial week schedule",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -264,7 +264,7 @@
 			},
 			"response": [
 				{
-					"id": "6373a002-699c-48ea-b88f-96ab0ce14dd7",
+					"id": "af14a937-e36c-429c-af6b-58fd39adeea9",
 					"name": "Success when close come before open in interval",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -343,7 +343,7 @@
 			},
 			"response": [
 				{
-					"id": "c6dcf37c-fca2-42a8-a6ce-db20e8ff8499",
+					"id": "25622ec6-68ac-477e-94bf-b181f76a06b9",
 					"name": "Success when intervals out of order",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -422,7 +422,7 @@
 			},
 			"response": [
 				{
-					"id": "52aaac71-7954-4569-b55c-53d78ea12bcd",
+					"id": "005c80dd-0583-4fac-9a7a-7b10a2122a6e",
 					"name": "Success when sunday overtime occurs",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -501,7 +501,7 @@
 			},
 			"response": [
 				{
-					"id": "9a4762cf-d220-439b-925f-81165c78b426",
+					"id": "ac40ad46-c9d0-4a0f-b1ee-9946f55123c8",
 					"name": "Success when closed all week",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -580,7 +580,7 @@
 			},
 			"response": [
 				{
-					"id": "38440a36-3fb3-4c0e-96c2-cc7fb09e6dbd",
+					"id": "7c915fd1-25f0-43ce-b9f2-bf53c2c27f37",
 					"name": "Success when open for a second",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -659,7 +659,7 @@
 			},
 			"response": [
 				{
-					"id": "2540e702-4b82-459c-b2ab-ce809e45e105",
+					"id": "47efb755-e4ba-45bc-bd83-2a4f4d0685ba",
 					"name": "Success when open for a minute",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -738,7 +738,7 @@
 			},
 			"response": [
 				{
-					"id": "ea9e7f29-89eb-47dc-93f0-0026393aeefd",
+					"id": "2e4bb748-a520-4092-bbb8-4b217581bece",
 					"name": "Success when open for 59 minutes",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -817,7 +817,7 @@
 			},
 			"response": [
 				{
-					"id": "47a4012e-e4f8-479b-98c8-2cfb56a4ad93",
+					"id": "c30fb014-b6e3-415b-9e40-0067ec93963a",
 					"name": "Success when partial week schedule",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -896,7 +896,7 @@
 			},
 			"response": [
 				{
-					"id": "0cf32f4b-65c1-4081-bb70-2a960616bbdf",
+					"id": "b4c1e0ab-882d-4ae9-9a8e-6bdbb8e72579",
 					"name": "Fail with overflow time with 1 second",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -969,7 +969,7 @@
 			},
 			"response": [
 				{
-					"id": "d779e4a1-e481-4dac-8f5e-aad543001505",
+					"id": "c37559be-3bd8-4d8f-982f-ddfadb93ff41",
 					"name": "Fails when double monday",
 					"originalRequest": {
 						"url": "http://localhost:8080/restaurantTimetable",
@@ -1042,7 +1042,7 @@
 			},
 			"response": [
 				{
-					"id": "d7340502-f6c3-4aeb-95fd-79667ccda450",
+					"id": "2f3c62c3-c4a6-4791-8b52-1c380d73197e",
 					"name": "Fails with negative time value",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1115,7 +1115,7 @@
 			},
 			"response": [
 				{
-					"id": "69b7e670-413d-4502-96e6-dd2544437d07",
+					"id": "5f58f573-1f32-488c-b0c1-1c9f9f1a9b63",
 					"name": "Fails with non-exist type value",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1194,7 +1194,7 @@
 			},
 			"response": [
 				{
-					"id": "71a91ffd-9d5c-4199-bc59-fcebefd4139f",
+					"id": "25084f9d-31ea-4e97-9bd5-32b5e9fc0c4b",
 					"name": "Fails with non-exist time value",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1273,7 +1273,7 @@
 			},
 			"response": [
 				{
-					"id": "5e6674a0-5042-4f4c-b0e0-c6cea23143cf",
+					"id": "2b139780-9464-43a6-bb02-ccbd79b57a51",
 					"name": "Fails when no such type name",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1346,7 +1346,7 @@
 			},
 			"response": [
 				{
-					"id": "6cb9c224-dd1a-4f62-94d5-6a79ef87023b",
+					"id": "67af1dc7-1e10-4f22-b4b6-f8e429802850",
 					"name": "Fails when no such day name",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1413,16 +1413,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 82800\n    }\n  ]\n}"
 				},
 				"description": ""
 			},
 			"response": [
 				{
-					"id": "a3988aa7-1c5b-48b0-8223-51b4f1569dbf",
+					"id": "e0cea80c-8a29-44bf-930e-38d594c6f62f",
 					"name": "Fails when unexpected closing object received",
 					"originalRequest": {
-						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"url": "http://localhost:8080/restaurantTimetable",
 						"method": "POST",
 						"header": [
 							{
@@ -1433,7 +1433,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 82800\n    }\n  ]\n}"
 						}
 					},
 					"status": "Bad Request",
@@ -1456,7 +1456,7 @@
 						{
 							"name": "date",
 							"key": "date",
-							"value": "Thu, 02 Jul 2020 21:45:37 GMT",
+							"value": "Thu, 04 Feb 2021 00:34:24 GMT",
 							"description": "The date and time that the message was sent"
 						},
 						{
@@ -1467,8 +1467,8 @@
 						}
 					],
 					"cookie": [],
-					"responseTime": 25,
-					"body": "{\"timestamp\":\"2020-07-03T00:45:37.965\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unexpected closing time! Closing time information was not expected\"}"
+					"responseTime": 391,
+					"body": "{\"timestamp\":\"2021-02-04T02:34:23.928\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unexpected closing time! Unexpected closing time on saturday\"}"
 				}
 			]
 		},
@@ -1486,16 +1486,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+					"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 70000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
 				},
 				"description": ""
 			},
 			"response": [
 				{
-					"id": "6b6de980-5566-4f8b-9552-8aa759ac7dec",
+					"id": "1e848912-05bf-4715-a58e-15711f3e1625",
 					"name": "Fails when unexpected opening object received",
 					"originalRequest": {
-						"url": "http://localhost:8080/convertTimesToReadableFormat",
+						"url": "http://localhost:8080/restaurantTimetable",
 						"method": "POST",
 						"header": [
 							{
@@ -1506,7 +1506,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 39600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
+							"raw": "{\n  \"friday\" : [\n    {\n      \"type\" : \"open\",\n      \"value\" : 64800\n    }\n  ],\n  \"saturday\": [\n    {\n      \"type\" : \"close\",\n      \"value\" : 3600\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 32400\n    },\n    {\n      \"type\" : \"open\",\n      \"value\" : 57600\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 70000\n    },\n    {\n      \"type\" : \"close\",\n      \"value\" : 82800\n    }\n  ]\n}"
 						}
 					},
 					"status": "Bad Request",
@@ -1529,7 +1529,7 @@
 						{
 							"name": "date",
 							"key": "date",
-							"value": "Thu, 02 Jul 2020 21:45:33 GMT",
+							"value": "Thu, 04 Feb 2021 00:38:19 GMT",
 							"description": "The date and time that the message was sent"
 						},
 						{
@@ -1540,8 +1540,8 @@
 						}
 					],
 					"cookie": [],
-					"responseTime": 25,
-					"body": "{\"timestamp\":\"2020-07-03T00:45:33.461\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unexpected opening time! Opening time information was not expected\"}"
+					"responseTime": 35,
+					"body": "{\"timestamp\":\"2021-02-04T02:38:19.566\",\"status\":\"BAD_REQUEST\",\"error\":\"Malformed JSON request\",\"message\":\"Unexpected opening time! Unexpected opening time on saturday\"}"
 				}
 			]
 		},
@@ -1565,7 +1565,7 @@
 			},
 			"response": [
 				{
-					"id": "8b5809ed-0528-4b82-9685-9b1e22ede609",
+					"id": "448e5a25-16c5-4b9a-8963-966800d19643",
 					"name": "Fails when non-sequential days comes in a row with related open-close time",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1638,7 +1638,7 @@
 			},
 			"response": [
 				{
-					"id": "bd42a950-deff-4d64-afaf-a9c80d560345",
+					"id": "da268cc9-0b10-4a6d-96bd-efbd01089b13",
 					"name": "Fails when there is no closing time at the end",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1711,7 +1711,7 @@
 			},
 			"response": [
 				{
-					"id": "02ef3586-3d3e-4652-84e0-eb9371ffc9c4",
+					"id": "94193855-68f8-4120-80a1-dfad59d6ed51",
 					"name": "Fails with missing request body",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1782,7 +1782,7 @@
 			},
 			"response": [
 				{
-					"id": "62eed54e-8c45-4801-8642-016774efb7dd",
+					"id": "830ea995-16d7-4c99-86df-5b21c004b135",
 					"name": "Fails with unsupported Media Type",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1855,7 +1855,7 @@
 			},
 			"response": [
 				{
-					"id": "1198d760-90b7-4e42-9f78-bb056d435cef",
+					"id": "ca5bbaaa-fb88-42f9-bc7d-ae018a96aefa",
 					"name": "Fails with unsupported request method",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -1932,7 +1932,7 @@
 			},
 			"response": [
 				{
-					"id": "5f8266cd-cdff-431f-b21f-d948bd01be71",
+					"id": "85591ec3-e252-426f-8868-1780d60d3ca2",
 					"name": "Fails with malformed request body",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -2006,7 +2006,7 @@
 			},
 			"response": [
 				{
-					"id": "a7efb6c6-3ef4-4f52-b9c5-e2f1481f179b",
+					"id": "f71dabb1-bd60-43bb-b5fe-59fba95c4bf8",
 					"name": "Fails with unexpected closing time on Monday when sunday info also exists",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",
@@ -2080,7 +2080,7 @@
 			},
 			"response": [
 				{
-					"id": "e7b8e3d4-741c-4c0c-a594-f89a059475ca",
+					"id": "86414dd9-5f60-4bcb-96fd-f2a56b8762ac",
 					"name": "Success with valid feedback input",
 					"originalRequest": {
 						"url": "http://localhost:8080/convertTimesToReadableFormat",

@@ -11,7 +11,7 @@
       "value" : 3600
     },
     {
-      "type" : "close",
+      "type" : "open",
       "value" : 32400
     },
     {
@@ -19,11 +19,11 @@
       "value" : 39600
     },
     {
-      "type" : "open",
+      "type" : "close",
       "value" : 57600
     },
     {
-      "type" : "close",
+      "type" : "open",
       "value" : 82800
     }
   ]

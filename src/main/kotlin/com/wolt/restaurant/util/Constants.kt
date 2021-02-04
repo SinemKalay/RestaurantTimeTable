@@ -6,6 +6,7 @@ object Constants {
     const val MIN_TIME_VALUE = 0
     const val EXP_MSG_UNEXP_OPENING = "Unexpected opening time!"
     const val EXP_MSG_UNEXP_CLOSING = "Unexpected closing time!"
+    const val EXP_MSG_UNMATCHED_OPEN_CLOSE = "Number of opening and closing times do not overlap"
     const val EXP_MSG_NON_SEQUENTIAL = "Entered days in working times info are not sequential!"
     const val EXP_MSG_INACCURATE_TIMING = "Corrupted time value!"
     const val EXP_MSG_RESP_BODY_NOT_FOUND = "Required request body is missing!"
@@ -19,5 +20,4 @@ object Constants {
     const val REASON_NO_SUCH_DAY = "Day names must be one of the followings:"
     const val EXP_MSG_NO_SUCH_TYPE = "No such type found."
     const val REASON_NO_SUCH_TYPE = "Type names must be one of the followings:"
-    const val ALL_DAY_CLOSED = "Closed"
 }

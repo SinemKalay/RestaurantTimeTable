@@ -7,6 +7,7 @@ object TestConstants {
     const val EXP_MSG_UNEXP_OPENING = "Unexpected opening time!"
     const val EXP_MSG_UNEXP_CLOSING = "Unexpected closing time!"
     const val EXP_MSG_NON_SEQUENTIAL = "Entered days in working times info are not sequential!"
+    const val EXP_MSG_UNMATCHED_OPEN_CLOSE = "Number of opening and closing times do not overlap"
     const val EXP_MSG_INACCURATE_TIMING = "Corrupted time value!"
     const val EXP_MSG_TIMING_CONSTRAINTS = "Value field should be exist and in between 0 and 86400."
     const val EXP_MSG_VALUE_NOT_FOUND = "Time value not found!"

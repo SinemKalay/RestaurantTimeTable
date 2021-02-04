@@ -14,7 +14,7 @@ class RestaurantController @Autowired constructor(
 
     @PostMapping(path = [Constants.POST_URI], consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun postTimetable(@RequestBody timetableJson: String): ResponseEntity<String> {
-        val readableSchedule = service.processTimetableReturnReadableSchedule(timetableJson)
+        val readableSchedule = service.formatThenReturnTimetable(timetableJson)
         return ResponseEntity.ok(readableSchedule)
     }
 }
