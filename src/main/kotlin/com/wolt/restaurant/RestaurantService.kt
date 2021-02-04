@@ -27,9 +27,10 @@ class RestaurantService {
     }
 
     fun convertToHashMapAndValidate(timetableJsonStr: String): HashMap<WeekDays, List<TypeValueDTO>> {
-        getLogger().info("Parse json input to TypeValueDTO")
         val mapDayIntervalList = parseJsonToDTO(timetableJsonStr)
+        getLogger().info("Json input parsed into HashMap<WeekDays, List<TypeValueDTO>>")
         TypeValueValidator().validateTimetableInput(mapDayIntervalList)
+        getLogger().info("HashMap validated")
 
         return mapDayIntervalList
     }
@@ -37,16 +38,16 @@ class RestaurantService {
     private fun getWeeklySchedule(mapDayIntervalList: HashMap<WeekDays, List<TypeValueDTO>>):
             Map<WeekDays, Set<String>> {
         val dayIntervalPairs: MutableList<Pair<WeekDays, String>> = mutableListOf()
+        val wholeWeekTypeValueList = getTypeValueDTOList(mapDayIntervalList)
 
-        val closedDays = mapDayIntervalList.filter {
-            it.value.isEmpty() ||
-                (it.value.size == 1 && it.value[0].type == TypeEnum.close.name)}.keys
-        closedDays.stream().forEach { dayIntervalPairs.add(Pair(it, "Closed")) }
+        if (isOpenCloseTypeNumbersMatching(wholeWeekTypeValueList)
+            && isOpenCloseTimesSequential(wholeWeekTypeValueList)) {
+            val closedDays = mapDayIntervalList.filter {
+                it.value.isEmpty() ||
+                    (it.value.size == 1 && it.value[0].type == TypeEnum.close.name)}.keys
+            closedDays.stream().forEach { dayIntervalPairs.add(Pair(it, "Closed")) }
 
-        if (closedDays.size != mapDayIntervalList.size) {
-            val wholeWeekTypeValueList = getTypeValueDTOList(mapDayIntervalList)
-            if (isOpenCloseTypeNumbersMatching(wholeWeekTypeValueList)
-                && isOpenCloseTimesSequential(wholeWeekTypeValueList)) {
+            if (closedDays.size != mapDayIntervalList.size) {
                 dayIntervalPairs.addAll(getDayIntervalPairs(wholeWeekTypeValueList))
             }
         }
@@ -55,6 +56,7 @@ class RestaurantService {
         return groupPairsToMapByWeekdays(dayIntervalPairs)
     }
 
+    @Throws(UnmatchedOpenCloseTimeException::class)
     private fun getDayIntervalPairs(wholeWeekTypeValueList: MutableList<TypeValueDTO>):
         MutableList<Pair<WeekDays, String>> {
         val dayIntervalPairs: MutableList<Pair<WeekDays, String>> = mutableListOf()
@@ -109,6 +111,7 @@ class RestaurantService {
             .toSortedMap(compareBy<WeekDays> { it.ordinal })
     }
 
+    @Throws(UnmatchedOpenCloseTimeException::class)
     private fun isSundayOvernightWorkExist(wholeWeekTypeValueList: MutableList<TypeValueDTO>): Boolean {
         var sundayOvernight = false
 
@@ -125,6 +128,7 @@ class RestaurantService {
         return sundayOvernight
     }
 
+    @Throws(UnmatchedOpenCloseTimeException::class)
     private fun isOpenCloseTypeNumbersMatching(wholeWeekTypeValueList: MutableList<TypeValueDTO>): Boolean {
         val numberOfOpenType: Int = wholeWeekTypeValueList.filter { it.type == TypeEnum.open.name }.count()
         val numberOfCloseType: Int = wholeWeekTypeValueList.filter { it.type == TypeEnum.close.name }.count()
@@ -135,6 +139,7 @@ class RestaurantService {
         return true
     }
 
+    @Throws(UnmatchedOpenCloseTimeException::class)
     private fun isOpenCloseTimesSequential(wholeWeekTypeValueList: MutableList<TypeValueDTO>): Boolean {
         for (i in 1 until wholeWeekTypeValueList.size) {
             if (wholeWeekTypeValueList[i - 1].type == wholeWeekTypeValueList[i].type) {

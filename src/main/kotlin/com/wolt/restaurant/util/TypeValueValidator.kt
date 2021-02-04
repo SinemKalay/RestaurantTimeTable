@@ -44,6 +44,7 @@ class TypeValueValidator {
         }
     }
 
+    @Throws(NoSuchTypeException::class)
     private fun checkTypeField(type: String) {
         if(type != TypeEnum.open.name && type != TypeEnum.close.name){
             val usableTypes = TypeEnum.values().contentToString()
@@ -52,6 +53,7 @@ class TypeValueValidator {
         }
     }
 
+    @Throws(InaccurateTimingException::class)
     private fun checkValueField(value: Int) {
         if(value < MIN_TIME_VALUE || value > MAX_TIME_VALUE)
             throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING,
