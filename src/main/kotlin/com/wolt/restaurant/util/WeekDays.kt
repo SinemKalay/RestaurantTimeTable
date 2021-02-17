@@ -1,6 +1,7 @@
 package com.wolt.restaurant.util
 
-enum class WeekDays {
+enum class WeekDays
+{
     monday,
     tuesday,
     wednesday,

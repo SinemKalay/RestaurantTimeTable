@@ -8,4 +8,4 @@ class ErrorResponse(
     val status: HttpStatus,
     val error: String,
     val message: String
-    )
+)

@@ -18,110 +18,165 @@ import java.time.LocalDateTime
 import javax.servlet.http.HttpServletRequest
 
 @ControllerAdvice
-class EndpointControllerAdvice: ResponseEntityExceptionHandler() {
+class EndpointControllerAdvice : ResponseEntityExceptionHandler()
+{
 
     @ExceptionHandler(UnmatchedOpenCloseTimeException::class)
-    fun handleUnmatchedOpenCloseTimeException(ex: UnmatchedOpenCloseTimeException): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", ex.message.toString())
+    fun handleUnmatchedOpenCloseTimeException(ex: UnmatchedOpenCloseTimeException): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(InaccurateTimingException::class)
-    fun handleInaccurateTimingException(ex: InaccurateTimingException): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", ex.message.toString())
+    fun handleInaccurateTimingException(ex: InaccurateTimingException): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(NoSuchDayException::class)
-    fun handleNoSuchDayException(ex: NoSuchDayException): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", ex.message.toString())
+    fun handleNoSuchDayException(ex: NoSuchDayException): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(TypeNotFoundException::class)
-    fun handleTypeNotFoundException(ex: TypeNotFoundException): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
-            "Malformed JSON request", ex.message.toString())
+    fun handleTypeNotFoundException(ex: TypeNotFoundException): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.NOT_FOUND,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(TimeValueNotFoundException::class)
-    fun handleTimeValueNotFoundException(ex: TimeValueNotFoundException): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND,
-            "Malformed JSON request", ex.message.toString())
+    fun handleTimeValueNotFoundException(ex: TimeValueNotFoundException): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.NOT_FOUND,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(NoSuchTypeException::class)
-    fun handleNoSuchTypeException(ex: NoSuchTypeException): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", ex.message.toString())
+    fun handleNoSuchTypeException(ex: NoSuchTypeException): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(JsonParseException::class)
-    fun handleJsonParseException(ex: JsonParseException, req: HttpServletRequest): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", ex.message.toString())
+    fun handleJsonParseException(ex: JsonParseException, req: HttpServletRequest): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(JsonSyntaxException::class)
-    fun handleJsonSyntaxException(ex: JsonSyntaxException, req: HttpServletRequest): ResponseEntity<Any> {
-        var errorResponse: ErrorResponse = if(ex.message!!.contains("java.lang.NumberFormatException")){
-            ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+    fun handleJsonSyntaxException(ex: JsonSyntaxException, req: HttpServletRequest): ResponseEntity<Any>
+    {
+        val errorResponse: ErrorResponse = if (ex.message!!.contains("java.lang.NumberFormatException"))
+        {
+            ErrorResponse(
+                LocalDateTime.now(), HttpStatus.BAD_REQUEST,
                 "Malformed JSON request",
-                "java.lang.NumberFormatException: Time value should be an int between 0 to 86399")
-        } else {
-            ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-                "Malformed JSON request", ex.message.toString())
+                "java.lang.NumberFormatException: Time value should be an int between 0 to 86399"
+            )
+        } else
+        {
+            ErrorResponse(
+                LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+                "Malformed JSON request", ex.message.toString()
+            )
         }
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(NumberFormatException::class)
-    fun handleNumberFormatException(ex: NumberFormatException, req: HttpServletRequest): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", ex.message.toString())
+    fun handleNumberFormatException(ex: NumberFormatException, req: HttpServletRequest): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
-    override fun handleNoHandlerFoundException(ex: NoHandlerFoundException,
-            headers: HttpHeaders, status: HttpStatus, request: WebRequest): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse( LocalDateTime.now(),HttpStatus.NOT_FOUND,
+    override fun handleNoHandlerFoundException(
+        ex: NoHandlerFoundException,
+        headers: HttpHeaders, status: HttpStatus, request: WebRequest
+    ): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.NOT_FOUND,
             "No handler found for ${ex.httpMethod} ${ex.requestURL}",
-            ex.message.toString())
+            ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
-    override fun handleHttpMessageNotReadable(ex:HttpMessageNotReadableException,
-            headers: HttpHeaders, status: HttpStatus, request:WebRequest): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "Malformed JSON request", ex.message.toString())
+    override fun handleHttpMessageNotReadable(
+        ex: HttpMessageNotReadableException,
+        headers: HttpHeaders, status: HttpStatus, request: WebRequest
+    ): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "Malformed JSON request", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
-    override fun handleHttpMediaTypeNotSupported(ex:HttpMediaTypeNotSupportedException,
-             headers: HttpHeaders,status: HttpStatus, request:WebRequest): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.UNSUPPORTED_MEDIA_TYPE,
-            "Unsupported media type", ex.message.toString())
+    override fun handleHttpMediaTypeNotSupported(
+        ex: HttpMediaTypeNotSupportedException,
+        headers: HttpHeaders, status: HttpStatus, request: WebRequest
+    ): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.UNSUPPORTED_MEDIA_TYPE,
+            "Unsupported media type", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
-    override fun handleHttpRequestMethodNotSupported(ex: HttpRequestMethodNotSupportedException,
-             headers: HttpHeaders,status: HttpStatus, request:WebRequest): ResponseEntity<Any> {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.METHOD_NOT_ALLOWED,
-            "Unsupported request method", ex.message.toString())
+    override fun handleHttpRequestMethodNotSupported(
+        ex: HttpRequestMethodNotSupportedException,
+        headers: HttpHeaders, status: HttpStatus, request: WebRequest
+    ): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.METHOD_NOT_ALLOWED,
+            "Unsupported request method", ex.message.toString()
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 
     @ExceptionHandler(Exception::class)
-    fun defaultErrorHandler(ex: Exception, request: WebRequest) : ResponseEntity<Any>  {
-        val errorResponse= ErrorResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST,
-            "An error occurred", ex.localizedMessage)
+    fun defaultErrorHandler(ex: Exception, request: WebRequest): ResponseEntity<Any>
+    {
+        val errorResponse = ErrorResponse(
+            LocalDateTime.now(), HttpStatus.BAD_REQUEST,
+            "An error occurred", ex.localizedMessage
+        )
         return ResponseEntityBuilder().build(errorResponse)
     }
 }

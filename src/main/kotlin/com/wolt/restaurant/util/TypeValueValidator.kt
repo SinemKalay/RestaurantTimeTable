@@ -12,32 +12,42 @@ import com.wolt.restaurant.util.Constants.REASON_NO_SUCH_DAY
 import com.wolt.restaurant.util.Constants.REASON_NO_SUCH_TYPE
 import kotlin.collections.HashMap
 
-class TypeValueValidator {
+class TypeValueValidator
+{
 
-    fun validateTimetableInput(typeValueMap: HashMap<WeekDays, List<TypeValueDTO>>) {
+    fun validateTimetableInput(typeValueMap: HashMap<WeekDays, List<TypeValueDTO>>)
+    {
         getLogger().info("Validate timetable input")
         checkWeekdayNames(typeValueMap.keys)
         checkDayIntervalsList(typeValueMap.values)
     }
 
     @Throws(NoSuchDayException::class)
-    private fun checkWeekdayNames(daysMutableSet: MutableSet<WeekDays>) {
+    private fun checkWeekdayNames(
+        daysMutableSet: MutableSet<WeekDays>
+    )
+    {
         val daysSet: Set<WeekDays> = daysMutableSet.toSet()
-        daysSet.forEach { d->
-            if(!WeekDays.values().contains(d)){
+        daysSet.forEach { d ->
+            if (!WeekDays.values().contains(d))
+            {
                 val usableDays = WeekDays.values().contentToString()
-                throw NoSuchDayException(EXP_MSG_NO_SUCH_DAY,
-                    "$REASON_NO_SUCH_DAY $usableDays")
+                throw NoSuchDayException(
+                    EXP_MSG_NO_SUCH_DAY,
+                    "$REASON_NO_SUCH_DAY $usableDays"
+                )
             }
         }
     }
 
     @Throws(NoSuchDayException::class, InaccurateTimingException::class)
-    private fun checkDayIntervalsList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>) {
+    private fun checkDayIntervalsList(mutListOfObjList: MutableCollection<List<TypeValueDTO>>)
+    {
         val daysIntervalsList: List<List<TypeValueDTO>> = mutListOfObjList.toList()
 
-        daysIntervalsList.forEach{intervalList->
-            for(typeValueObj in intervalList){
+        daysIntervalsList.forEach { intervalList ->
+            for (typeValueObj in intervalList)
+            {
                 checkTypeField(typeValueObj.type)
                 checkValueField(typeValueObj.value)
             }
@@ -45,18 +55,25 @@ class TypeValueValidator {
     }
 
     @Throws(NoSuchTypeException::class)
-    private fun checkTypeField(type: String) {
-        if(type != TypeEnum.open.name && type != TypeEnum.close.name){
+    private fun checkTypeField(type: String)
+    {
+        if (type != TypeEnum.open.name && type != TypeEnum.close.name)
+        {
             val usableTypes = TypeEnum.values().contentToString()
-            throw NoSuchTypeException(EXP_MSG_NO_SUCH_TYPE,
-                "$REASON_NO_SUCH_TYPE $usableTypes")
+            throw NoSuchTypeException(
+                EXP_MSG_NO_SUCH_TYPE,
+                "$REASON_NO_SUCH_TYPE $usableTypes"
+            )
         }
     }
 
     @Throws(InaccurateTimingException::class)
-    private fun checkValueField(value: Int) {
-        if(value < MIN_TIME_VALUE || value > MAX_TIME_VALUE)
-            throw InaccurateTimingException(Constants.EXP_MSG_INACCURATE_TIMING,
-                Constants.REASON_INACCURATE_TIMING_VALUE)
+    private fun checkValueField(value: Int)
+    {
+        if (value < MIN_TIME_VALUE || value > MAX_TIME_VALUE)
+            throw InaccurateTimingException(
+                Constants.EXP_MSG_INACCURATE_TIMING,
+                Constants.REASON_INACCURATE_TIMING_VALUE
+            )
     }
 }

@@ -1,5 +1,6 @@
 package com.wolt.restaurant.util
 
-enum class TypeEnum {
+enum class TypeEnum
+{
     open, close
 }
